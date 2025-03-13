@@ -1,4 +1,56 @@
-/* body{
-    background-image: linear-gradient(red,white,green);
-    background-repeat: no-repeat;
-} */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #c8102e, #f1f1f1, #007a3d);
+    color: #333;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+app-navbar {
+    display: block;
+    background: linear-gradient(to right, #c8102e, #f1f1f1, #007a3d);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+}
+app-navbar:hover {
+    background-color: #34495e;
+}
+app-navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    
+}
+app-navbar a:hover {
+    color: #1abc9c;
+}
+.router-outlet {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    transition: transform 0.3s ease;
+}
+.router-outlet:hover {
+    transform: scale(1.02);
+}
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    app-navbar {
+        padding: 10px;
+    }
+    app-navbar a {
+        margin: 0 10px;
+    }
+}
