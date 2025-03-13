@@ -8,6 +8,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css'],
   standalone: false
+  //teszt
 })
 export class CommentsComponent implements OnInit {
   comments: any[] = [];
