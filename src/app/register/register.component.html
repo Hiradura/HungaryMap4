@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="language-selector">
+        <button (click)="changeLanguage('hu')">Magyar</button>
+        <button (click)="changeLanguage('en')">English</button>
+    </div>
+
+    <h2>{{ 'REGISTER.TITLE' | translate }}</h2>
+
+    <form>
+        <div class="form-group">
+            <label for="email">{{ 'REGISTER.EMAIL' | translate }}</label>
+            <input [(ngModel)]="email" [ngModelOptions]="{standalone: true}" type="email" id="email" class="form-control" placeholder="{{ 'REGISTER.EMAIL_PLACEHOLDER' | translate }}">
+        </div>
+
+        <div class="form-group">
+            <label for="password">{{ 'REGISTER.PASSWORD' | translate }}</label>
+            <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" id="password" class="form-control" placeholder="{{ 'REGISTER.PASSWORD_PLACEHOLDER' | translate }}">
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">{{ 'REGISTER.CONFIRM_PASSWORD' | translate }}</label>
+            <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" type="password" id="confirmPassword" class="form-control" placeholder="{{ 'REGISTER.CONFIRM_PASSWORD_PLACEHOLDER' | translate }}">
+        </div>
+
+        <div class="form-group">
+            <a routerLink="/login" class="already-have-account">{{ 'REGISTER.ALREADY_HAVE_ACCOUNT' | translate }}</a>
+        </div>
+
+        <button type="submit" (click)="register()" class="btn registerbutton">{{ 'REGISTER.SUBMIT' | translate }}</button>
+        <button (click)="registerWithGoogle()">Bejelentkezés Google-lel</button>
+    </form>
+</div>

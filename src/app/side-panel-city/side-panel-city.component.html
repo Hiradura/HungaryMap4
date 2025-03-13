@@ -1,0 +1,10 @@
+<div class="side-panel" [class.open]="isOpen">
+   <div class="conatiner content">
+      <h1 class="country-name"> A vármegye neve: {{selectedRegion}}</h1>
+      <h3>Magyarország zászlója és a megye címere:</h3>
+      <img src="Hungary-Flag.svg" alt="flag" class="country-Flag">
+      <img src="Country-Crest/Coa_Hungary_County_Nógrád.svg"  alt="crest" class="country-Crest">
+      <h3>Az összes település a megyében:</h3>
+   </div>   
+      <button class="close-btn" (click)="closePanel()"><i class="bi bi-x-lg"></i></button>
+</div>

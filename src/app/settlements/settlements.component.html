@@ -1,0 +1,64 @@
+ <div>
+    <div class="search-container">
+        <div class="search-wrapper">      
+            
+        </div>
+    </div>
+    <button *ngIf="user" (click)="openModal()" class="fixed-button">Település Hozzáadása</button>
+    <table>
+      <thead>
+        <tr>
+          <th>Helységnév</th>
+          <th>Keleti Hosszúság</th>
+          <th>Keleti hosszúság fok, perc</th>
+          <th>Északi szélesség</th>
+          <th>Északi szélesség fok, perc</th>
+          <th *ngIf="user"><input class="form-control mr-sm-2 kereses"type="search"placeholder="Keresés"aria-label="search"(keyup)="onKeyUp($event)">Műveletek: </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of paginatedDatas|search:word">
+          <td><input class="form-control" [(ngModel)]="data.Helysegnev"></td>
+          <td><input class="form-control" [(ngModel)]="data.KH"></td>
+          <td><input class="form-control" [(ngModel)]="data.keleti_hossz_fok_perc"></td>
+          <td><input class="form-control" [(ngModel)]="data.ESZ"></td>
+          <td><input class="form-control" [(ngModel)]="data.eszaki_szelesseg_fok_perc"></td>
+          <td>
+            <button class="btn btn-outline-warning" *ngIf="user" (click)="updateSettlement(data)">Frissítés</button>
+            <button class="btn btn-outline-danger" *ngIf="user" (click)="deleteSettlement(data.id)">Törlés</button>
+            <button class="btn btn-outline-primary" *ngIf="user" [routerLink]="['/comments', data.Helysegnev]" [routerLinkActive]="['active']" [queryParams]="{email: user?.email}">Kommentelés</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button class="btn" (click)="prevPage()" [disabled]="currentPage === 1">Előző</button>
+      <span>Oldal {{ currentPage }} / {{ totalPages }}</span>
+      <button class="btn" (click)="nextPage()" [disabled]="currentPage === totalPages">Következő</button>
+    </div>
+  </div>
+
+  <div class="modal" tabindex="-1" *ngIf="isVisible">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Település Hozzáadása</h5>
+          <button type="button" class="btn-close btn-danger" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+            <input type="text" class="form-control" placeholder="Helységnév" [(ngModel)]="settlements.Helysegnev" >
+            <input type="number" class="form-control" placeholder="Keleti Hosszúság" [(ngModel)]="settlements.KH">
+            <input type="number" class="form-control" placeholder="Keleti hosszúság fok,perc" [(ngModel)]="settlements.keleti_hossz_fok_perc">
+            <input type="number" class="form-control" placeholder="Északi szélesseg" [(ngModel)]="settlements.ESZ">
+            <input type="number" class="form-control" placeholder="Északi szélesseg fok,perc" [(ngModel)]="settlements.eszaki_szelesseg_fok_perc">
+            
+        </div>
+        <div class="kep" ><img class="svg" src="Kep.svg"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModal()">Bezárás</button>
+          <button type="button" class="btn btn-success" (click)="addSettlement()">Település Hozzáadása</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

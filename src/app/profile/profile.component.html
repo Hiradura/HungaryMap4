@@ -1,0 +1,21 @@
+<div *ngIf="loggedUser" class="card">
+    <div class="card-body">
+      <h5 class="card-title">Profil</h5>
+      <div class="row">
+        <div class="col">
+          <img [src]="loggedUser.photoURL" class="img-thumbnail" alt="Profilkép">
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="editedDisplayName" type="text" class="form-control" id="floatingInput" [disabled]="!editMode">
+            <label for="floatingInput">Megjelenítési név</label>
+          </div>   
+          <div class="form-floating mb-3">
+            <input [(ngModel)]="loggedUser.email" type="email" class="form-control" id="email" disabled>
+            <label for="email">E-Mail</label>
+          </div>    
+          <button *ngIf="!editMode" (click)="toggleEditMode()" class="btn btn-warning">Szerkesztés</button>
+          <button *ngIf="editMode" (click)="saveProfile()" class="btn btn-primary">Mentés</button>
+          <button *ngIf="editMode" (click)="toggleEditMode()" class="btn btn-secondary">Mégse</button>
+        </div>
+      </div>
+    </div>
+</div>
