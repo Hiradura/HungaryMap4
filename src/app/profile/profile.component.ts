@@ -4,9 +4,8 @@ import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-profile',
   standalone: false,
-  
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
   loggedUser: any;
@@ -17,15 +16,16 @@ export class ProfileComponent {
   constructor(private auth: AuthService) {
     this.auth.getCurrentUser().subscribe(user => {
       this.loggedUser = user;
-      this.editedDisplayName = user?.displayName || '';
-      this.editedDisplayEmail = user?.email
+      if (user) {
+        this.editedDisplayName = user.displayName || '';
+        this.editedDisplayEmail = user.email || '';
+      }
     });
   }
 
   toggleEditMode() {
     this.editMode = !this.editMode;
   }
-
   saveProfile() {
     if (this.editedDisplayName.trim()) {
       this.auth.updateUserProfile({ displayName: this.editedDisplayName }).then(() => {

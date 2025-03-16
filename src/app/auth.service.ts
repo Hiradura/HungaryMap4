@@ -17,34 +17,52 @@ export class AuthService {
     });
   }
 
-  register(email: string, password: string) {
-    return this.afAuth.createUserWithEmailAndPassword(email, password).then(cred => {
-      if (cred.user) {
-        this.loggedUserSubject.next(cred.user);
-      }
-    });
+  register(email: string, password: string, displayName: string): Promise<void> {
+    return this.afAuth.createUserWithEmailAndPassword(email, password)
+      .then(cred => {
+        if (cred.user) {
+          return cred.user.updateProfile({ displayName: displayName }).then(() => {
+            this.loggedUserSubject.next(cred.user);
+            this.router.navigate(['/login']);
+          });
+        }
+        return Promise.reject('Felhasználó nem található.');
+      })
+      .catch(error => {
+        console.error("Regisztrációs hiba:", error);
+        throw error;
+      });
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string): Promise<void> {
     return this.afAuth.signInWithEmailAndPassword(email, password).then(cred => {
       if (cred.user) {
         this.loggedUserSubject.next(cred.user);
       }
+    }).catch(error => {
+      console.error("Bejelentkezési hiba:", error);
+      throw error;
     });
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): Promise<void> {
     return this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(cred => {
       if (cred.user) {
         this.loggedUserSubject.next(cred.user);
       }
+    }).catch(error => {
+      console.error("Google bejelentkezési hiba:", error);
+      throw error;
     });
   }
 
-  logout() {
-    this.afAuth.signOut().then(() => {
+  logout(): Promise<void> {
+    return this.afAuth.signOut().then(() => {
       this.loggedUserSubject.next(null);
       this.router.navigate(['/map']);
+    }).catch(error => {
+      console.error("Kilépési hiba:", error);
+      throw error;
     });
   }
 
@@ -53,7 +71,7 @@ export class AuthService {
       map(user => user ? { 
         uid: user.uid, 
         email: user.email, 
-        displayName: user.displayName || 'Névtelen'
+        displayName: user.displayName || 'Névtelen' 
       } : null)
     );
   }
@@ -67,6 +85,9 @@ export class AuthService {
       } else {
         return Promise.reject('Nincs bejelentkezett felhasználó.');
       }
+    }).catch(error => {
+      console.error("Profil frissítési hiba:", error);
+      throw error;
     });
   }
 }

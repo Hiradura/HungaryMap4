@@ -1,18 +1,26 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-register',
   standalone: false,
-  
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
   currentLang: any;
   email: string = '';
-  password: string = '';
-  constructor(private translate: TranslateService, private authService: AuthService) {
+  password: string = '';           
+  confirmPassword: string = '';     
+  displayName: string = '';        
+  emailError: string = '';         
+  passwordError: string = '';       
+  confirmPasswordError: string = ''; // Hozzáadva a jelszó megerősítéséhez kapcsolódó hiba
+  registrationSuccess: boolean = false; // Regisztráció sikerességét jelző változó
+
+  constructor(private translate: TranslateService, private authService: AuthService, private router: Router) {
     const en = {
       "REGISTER": {
         "TITLE": "Register",
@@ -55,11 +63,47 @@ export class RegisterComponent {
   changeLanguage(lang: string) {
     this.translate.use(lang);
   }
-  register() {
-    this.authService.register(this.email, this.password)
-      .then(res => console.log("Sikeres regisztráció!", res))
-      .catch(err => console.error("Hiba történt!", err));
+
+  validateEmail(): boolean {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(this.email);
   }
+
+  validatePassword(): boolean {
+    if (this.password !== this.confirmPassword) {
+      this.confirmPasswordError = 'A jelszavak nem egyeznek!';
+      return false;
+    } else if (this.password.length < 6) {
+      this.passwordError = 'A jelszónak legalább 6 karakter hosszúnak kell lennie!';
+      return false;
+    }
+    this.passwordError = '';
+    this.confirmPasswordError = '';
+    return true;
+  }
+
+  register() {
+    if (!this.validateEmail()) {
+      this.emailError = 'Hibás email cím!';
+      return;
+    } else {
+      this.emailError = '';
+    }
+
+    if (!this.validatePassword()) {
+      return;
+    }
+
+    this.authService.register(this.email, this.password, this.displayName)
+      .then(res => {
+        this.registrationSuccess = true;
+        this.router.navigate(['/login']); 
+      })
+      .catch(err => {
+        console.error("Hiba történt!", err);
+      });
+  }
+
   registerWithGoogle() {
     this.authService.loginWithGoogle()
       .then(res => console.log("Sikeres Google bejelentkezés!", res))
