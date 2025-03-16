@@ -1,24 +1,104 @@
-.kereses{
-    margin-bottom: 50px;
-    justify-items: center;
+button {
+  margin-top: 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.kosar-gomb-container{
-    text-align: right;
-    margin-top: 5px;
+
+button:hover {
+  background-color: #0056b3;
 }
-.kosar-gomb {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-.kosar-gomb:hover {
-    background-color: #0056b3;
-  }
-  
- .cucc{
-    margin-bottom: 15px;
- } 
+.badge {
+  background-color: #ff5733;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+.egesz {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+  padding: 20px;
+}
+
+.card {
+  width: 18rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.card input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.card button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.card button:hover {
+  background-color: #218838;
+}
+
+.kereses {
+  margin: 20px 0;
+}
+
+.filter-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-item {
+  margin-bottom: 15px;
+}
+
+.filter-item input {
+  margin-bottom: 5px;
+}
+
+.filter-item label {
+  font-size: 0.875rem;
+  color: #555;
+}

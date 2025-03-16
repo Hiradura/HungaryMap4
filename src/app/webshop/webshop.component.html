@@ -1,33 +1,42 @@
-<div class="kosar-gomb-container">
-  <button class="kosar-gomb" (click)="cardbtn()">Kosár <i class="bi bi-bag-check-fill"></i></button>
-</div>
-
 <div class="kereses">
   <div class="row">
     <div class="col">
       <h4>Szűrés:</h4>
       <div class="filter-inputs">
         <div class="filter-item">
-          <input class="form-control" type="text" placeholder="Keresés árszerint">Ár
+          <input 
+            class="form-control" 
+            type="number" 
+            placeholder="Keresés árszerint" 
+            (input)="filterPrice($event)" />
+          <label for="price">Ár max</label>
         </div>
         <div class="filter-item">
-          <input class="form-control" type="text" placeholder="Keresés kategória szerint">Kategória
+          <input 
+            class="form-control" 
+            type="text" 
+            placeholder="Keresés kategória szerint" 
+            (input)="filterCategory($event)" />
+          <label for="category">Kategória</label>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<button (click)="viewCart()" class="btn btn-primary">
+  Kosár
+  <span class="badge badge-light">{{ cartCount }}</span>
+</button>
 <div class="egesz">
   <div class="row">
-    <div class="col cucc" *ngFor="let data of shopDatas">
-      <div class="card" style="width: 18rem;">
+    <div class="col cucc" *ngFor="let data of filteredShopDatas">
+      <div class="card">
         <img class="card-img-top" [src]="data.path" [alt]="data.alt">
         <div class="card-body">
-          <h5 class="card-title">{{data.nev}}</h5>
-          <p class="card-text">{{data.ar}}Ft</p>
-          <input #db value="1" type="number" class="form-control">
-          <button (click)="addStuff(element,db.value)" class="btn btn-outline-primary">Megveszem</button>
+          <h5 class="card-title">{{ data.nev }}</h5>
+          <p class="card-text">{{ data.ar }} Ft</p>
+          <input [(ngModel)]="data.db" type="number" class="form-control" min="1" [max]="data.maxDb" />
+          <button (click)="addStuff(data, data.db)" class="btn btn-outline-primary">Megveszem</button>
         </div>
       </div>
     </div>

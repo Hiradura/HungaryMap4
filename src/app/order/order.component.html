@@ -1,1 +1,50 @@
-
+<div class="kereses">
+    <div class="row">
+      <div class="col">
+        <h4>Szűrés:</h4>
+        <div class="filter-inputs">
+          <div class="filter-item">
+            <input 
+              class="form-control" 
+              type="number" 
+              placeholder="Keresés árszerint" 
+              (input)="filterPrice($event)" />
+            <label for="price">Ár max</label>
+          </div>
+          <div class="filter-item">
+            <input 
+              class="form-control" 
+              type="text" 
+              placeholder="Keresés kategória szerint" 
+              (input)="filterCategory($event)" />
+            <label for="category">Kategória</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Kosár gomb -->
+  <button (click)="viewCart()" class="btn btn-primary">
+    Kosár
+    <span class="badge badge-light">{{ cartCount }}</span>
+  </button>
+  
+  <!-- Termékek megjelenítése -->
+  <div class="egesz">
+    <div class="row">
+      <div class="col cucc" *ngFor="let data of filteredShopDatas">
+        <div class="card">
+          <!-- Kép hozzáadása statikusan -->
+          <img class="card-img-top" [src]="'assets/kepek/30lhatizsak.jpg'" [alt]="data.alt">
+          <div class="card-body">
+            <h5 class="card-title">{{ data.nev }}</h5>
+            <p class="card-text">{{ data.ar }} Ft</p>
+            <input [(ngModel)]="data.db" type="number" class="form-control" min="1" [max]="data.maxDb" />
+            <button (click)="addStuff(data, data.db)" class="btn btn-outline-primary">Megveszem</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

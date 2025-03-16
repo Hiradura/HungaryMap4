@@ -2,14 +2,18 @@ body {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to right, #c8102e, #f1f1f1, #007a3d);
+    background: linear-gradient(to right, #d897a2, #f1f1f1, #007a3d);
     color: #333;
+    min-height: 100vh;
 }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    z-index: 2;
 }
+
 app-navbar {
     display: block;
     background: linear-gradient(to right, #c8102e, #f1f1f1, #007a3d);
@@ -17,21 +21,25 @@ app-navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 15px 20px;
     transition: all 0.3s ease;
+    z-index: 3;
 }
+
 app-navbar:hover {
     background-color: #34495e;
 }
+
 app-navbar a {
     color: white;
     text-decoration: none;
     margin: 0 15px;
     font-weight: bold;
     transition: color 0.3s ease;
-    
 }
+
 app-navbar a:hover {
     color: #1abc9c;
 }
+
 .router-outlet {
     background-color: white;
     border-radius: 12px;
@@ -39,10 +47,13 @@ app-navbar a:hover {
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     transition: transform 0.3s ease;
+    z-index: 1;
 }
+
 .router-outlet:hover {
     transform: scale(1.02);
 }
+
 @media (max-width: 768px) {
     .container {
         padding: 10px;
