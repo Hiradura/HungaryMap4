@@ -15,27 +15,35 @@ interface Settlement {
   selector: 'app-settlements',
   standalone: false,
   templateUrl: './settlements.component.html',
-  styleUrl: './settlements.component.css'
+  styleUrls: ['./settlements.component.css']
 })
 export class SettlementsComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   datas: Settlement[] = []; 
   paginatedDatas: Settlement[] = [];
-  settlements={id:null,ESZ:null,Helysegnev:'',KH:null,eszaki_szelesseg_fok_perc:null,keleti_hossz_fok_perc:null} 
+  settlements = {
+    id: null,
+    Helysegnev: '',
+    KH: null,
+    eszaki_szelesseg_fok_perc: null,
+    keleti_hossz_fok_perc: null,
+    ESZ: null
+  };
   currentPage: number = 1;
   itemsPerPage: number = 50;
   totalPages: number = 0;
   word: string = '';
   isVisible: boolean = false;
-  user:any
+  user: any;
+  selectedCity: string = ''; // Kiválasztott város neve
 
-  constructor(private baseService: BaseService,private auth:AuthService) { }
+  constructor(private baseService: BaseService, private auth: AuthService) { }
 
   ngOnInit(): void {
     this.getModifiedDatas();
     this.auth.getCurrentUser().subscribe(user => {
-      this.user = user
-    }) 
+      this.user = user;
+    });
   }
 
   getModifiedDatas(): void {
@@ -76,7 +84,7 @@ export class SettlementsComponent implements OnInit {
     this.updatePagination();
   }
 
-  updateSettlement(settlement: any) {
+  updateSettlement(settlement: any): void {
     if (!settlement.id) {
       console.error("Hiba: Az azonosító hiányzik!", settlement);
       return;
@@ -94,28 +102,36 @@ export class SettlementsComponent implements OnInit {
       this.getModifiedDatas();
     });
   }
-  addSettlement() {
-            this.baseService.createSettlement(this.settlements).subscribe({
-          next: () => {
-            this.getModifiedDatas(); 
-            this.settlements = { 
-              id: null,
-              Helysegnev: '',
-              KH: null,
-              keleti_hossz_fok_perc: null,
-              ESZ: null,
-              eszaki_szelesseg_fok_perc: null
-            };
-          },
-        });
-      }
-  closePanel() {
-    this.close.emit(); 
+
+  addSettlement(): void {
+    this.baseService.createSettlement(this.settlements).subscribe({
+      next: () => {
+        this.getModifiedDatas(); 
+        this.settlements = { 
+          id: null,
+          Helysegnev: '',
+          KH: null,
+          keleti_hossz_fok_perc: null,
+          ESZ: null,
+          eszaki_szelesseg_fok_perc: null
+        };
+      },
+    });
   }
-  openModal() {
+
+  openModal(): void {
     this.isVisible = true;
   }
-  closeModal() {
+
+  closeModal(): void {
     this.isVisible = false;
+  }
+
+  closePanel(): void {
+    this.close.emit(); 
+  }
+
+  selectCity(cityName: string): void {
+    this.selectedCity = cityName;
   }
 }

@@ -8,7 +8,6 @@ import { AuthService } from '../auth.service';
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.css'],
   standalone: false
-  //teszt
 })
 export class CommentsComponent implements OnInit {
   comments: any[] = [];
@@ -24,10 +23,10 @@ export class CommentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
-      this.currentHelysegnev = params.get('helysegnev') || '';
-      this.loadComments(); 
+      this.currentHelysegnev = params.get('helysegnev') || 'Csevegő'; 
+      this.commentData.Helysegnev = this.currentHelysegnev; 
+      this.loadComments();
     });
-
 
     this.auth.getCurrentUser().subscribe(user => {
       this.user = user;
@@ -37,12 +36,6 @@ export class CommentsComponent implements OnInit {
       }
     });
   }
-
-  
-  generateId(): string {
-    return Math.random().toString(36).substr(2, 9); 
-  }
-
 
   postComment(): void {
     const newComment = {
@@ -54,9 +47,10 @@ export class CommentsComponent implements OnInit {
       this.loadComments();
     });
   }
-  deleteComment(postId: string): void {
+
+  deleteComment(postId: string, commentEmail: string): void {
     if (postId) {
-     {
+      if (this.user && this.user.email === commentEmail) {  
         this.commentService.deleteComment(postId).subscribe(
           () => {
             this.loadComments();
@@ -65,18 +59,23 @@ export class CommentsComponent implements OnInit {
             console.error('Hiba a komment törlésénél:', error);
           }
         );
+      } else {
+        console.error('Nem tudod törölni más kommentjét.');
       }
     } else {
       console.error('Nincs megadva komment ID');
     }
   }
-  
+
   loadComments(): void {
     this.commentService.getComments().subscribe(
       (data: any) => {
         this.comments = Object.keys(data).map(key => {
-          return { id: key, ...data[key] };
-        });
+          const comment = { id: key, ...data[key] };
+          if (comment.Helysegnev === this.currentHelysegnev) {
+            return comment;
+          }
+        }).filter(Boolean);
       },
       error => {
         console.error('Hiba a kommentek betöltésekor:', error);
