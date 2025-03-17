@@ -12,8 +12,6 @@ export class CardService {
   private ordersURL = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/orders.json";
 
   constructor(private http: HttpClient) {}
-
-  // Rendelés hozzáadása a Firebase adatbázishoz
   addOrder(orderData: { 
     name: string; 
     address: string; 
@@ -27,13 +25,13 @@ export class CardService {
   }): Observable<any> {
     const body = { 
       ...orderData, 
-      cart: orderData.cart.length ? orderData.cart : [] // Ha a kosár üres, akkor üres listát adunk át
+      cart: orderData.cart.length ? orderData.cart : []
     };
 
     return this.http.post<any>(this.ordersURL, body).pipe(
       catchError(error => {
         console.error('Hiba történt a rendelés mentése során:', error);
-        alert('Hiba történt a rendelés mentése során!'); // Felhasználó értesítése
+        alert('Hiba történt a rendelés mentése során!');
         return of(null); 
       }),
       map(response => {
@@ -42,8 +40,6 @@ export class CardService {
       })
     );
   }
-
-  // Rendelések lekérdezése az email cím alapján
   getOrdersByUser(email: string): Observable<any[]> {
     const url = `https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/orders.json?orderBy="email"&equalTo="${encodeURIComponent(email)}"`;
 
@@ -52,22 +48,18 @@ export class CardService {
       catchError(error => {
         console.error('Hiba történt a rendeléseket tartalmazó lekérdezés során:', error);
         alert('Hiba történt a rendeléseket tartalmazó lekérdezés során!');
-        return of([]);  // Ha hiba van, üres tömböt adunk vissza
+        return of([]); 
       }),
       map((response: any) => {
         console.log('Válasz a Firebase-től:', response);
         if (!response) return []; 
-        return Object.values(response); // Az adatok tömbbe konvertálása
+        return Object.values(response);
       })
     );
   }
-
-  // Kosár adatainak lekérése
   getCart(): Observable<any[]> {
     return this.cardSub.asObservable();
   }
-
-  // Elem hozzáadása a kosárhoz
   addElement(element: any, db: number): void {
     const index = this.card.findIndex((e: any) => e.id === element.id);
 
@@ -78,12 +70,10 @@ export class CardService {
       this.card[index].db = db;
     }
 
-    this.cardSub.next(this.card); // A kosár frissítése
+    this.cardSub.next(this.card); 
   }
-
-  // Kosár ürítése
   clearCart(): void {
     this.card = [];
-    this.cardSub.next(this.card); // A kosár frissítése
+    this.cardSub.next(this.card);
   }
 }
