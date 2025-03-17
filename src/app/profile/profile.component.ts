@@ -15,6 +15,7 @@ export class ProfileComponent {
   editedDisplayName = '';
   comments: any[] = [];
   orders: any[] = [];
+  selectedOrder: any = null; // This holds the order details for the modal
 
   currentPage = 1;
   commentsPerPage = 5;
@@ -28,8 +29,8 @@ export class ProfileComponent {
       if (user) {
         this.loggedUser = user;
         this.editedDisplayName = user.displayName || '';
-        this.loadUserComments(user.email); 
-        this.loadOrders(user.email);      
+        this.loadUserComments(user.email);
+        this.loadOrders(user.email);
       }
     });
   }
@@ -41,7 +42,9 @@ export class ProfileComponent {
   saveProfile() {
     if (this.editedDisplayName.trim()) {
       this.auth.updateUserProfile({ displayName: this.editedDisplayName }).then(() => {
-        this.loggedUser.displayName = this.editedDisplayName;
+        if (this.loggedUser) {
+          this.loggedUser.displayName = this.editedDisplayName;
+        }
         this.editMode = false;
         console.log('Profil sikeresen frissítve!');
       }).catch(error => {
@@ -56,19 +59,34 @@ export class ProfileComponent {
       (userComments: any[]) => {
         this.comments = userComments;
       },
-      (error) => console.error('Hiba a kommentek betöltésekor:', error)
+      (error) => {
+        console.error('Hiba a kommentek betöltésekor:', error);
+      }
     );
   }
 
-  loadOrders(email: string) {
+  loadOrders(email: string): void {
     this.cardService.getOrdersByUser(email).subscribe(
-      (orders: any) => {
+      (orders: any[]) => {
         console.log('Rendelési adatok:', orders);
         this.orders = orders || [];
       },
-      (error) => console.error('Hiba a rendelési előzmények betöltésekor:', error)
+      (error) => {
+        console.error('Hiba a rendelési előzmények betöltésekor:', error);
+      }
     );
   }
+
+  calculateTotalPrice(cart: any[]): number {
+    return cart?.reduce((total, item) => total + (item.ar * item.db), 0);
+  }
+  
+  openOrderDetails(order: any) {
+    this.selectedOrder = order;
+    const modal = new (window as any).bootstrap.Modal(document.getElementById('orderDetailsModal')!);
+    modal.show();
+  }
+  
 
   get paginatedComments() {
     const start = (this.currentPage - 1) * this.commentsPerPage;
