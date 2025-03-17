@@ -59,4 +59,16 @@ export class BaseService {
   getBalaton(){
     this.http.get("https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/balaton.json")
   }
+  getCommentsByUser(email: string): Observable<any[]> {
+    return this.http.get<{ [key: string]: any }>(
+      `https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/comments.json`
+    ).pipe(
+      map(res => {
+        if (!res) return []; 
+        return Object.keys(res)
+          .map(key => ({ id: key, ...res[key] }))
+          .filter(comment => comment.Email === email);  
+      })
+    );
+  }
 }

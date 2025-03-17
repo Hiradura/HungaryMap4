@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +34,9 @@ export class CardService {
     );
   }
   
-  
+  getOrdersByUser(email: string): Observable<any[]> {
+    return this.http.get<any[]>(`/api/orders?email=${email}`);
+  }
   getCart(){
     return this.cardSub
   }

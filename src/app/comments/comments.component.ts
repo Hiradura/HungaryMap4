@@ -33,6 +33,7 @@ export class CommentsComponent implements OnInit {
       if (user) {
         this.commentData.Email = user.email || '';  
         this.commentData.displayName = user.displayName || 'Névtelen'; 
+        this.loadUserComments(user.email);
       }
     });
   }
@@ -79,6 +80,16 @@ export class CommentsComponent implements OnInit {
       },
       error => {
         console.error('Hiba a kommentek betöltésekor:', error);
+      }
+    );
+  }
+  loadUserComments(email: string): void {
+    this.commentService['getCommentsByUser'](email).subscribe(
+      (userComments: any[]) => {
+        console.log('Felhasználó kommentjei:', userComments);
+      },
+      (error: any) => { 
+        console.error('Hiba a felhasználó kommentjeinek lekérésekor:', error);
       }
     );
   }
