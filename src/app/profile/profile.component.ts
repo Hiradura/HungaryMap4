@@ -16,7 +16,6 @@ export class ProfileComponent {
   comments: any[] = [];
   orders: any[] = [];
 
-  // Lapozás változók
   currentPage = 1;
   commentsPerPage = 5;
 
@@ -29,8 +28,8 @@ export class ProfileComponent {
       if (user) {
         this.loggedUser = user;
         this.editedDisplayName = user.displayName || '';
-        this.loadUserComments(user.email);
-        this.loadOrders(user.email);
+        this.loadUserComments(user.email);  // Kommentek betöltése
+        this.loadOrders(user.email);        // Rendelések betöltése
       }
     });
   }
@@ -47,6 +46,7 @@ export class ProfileComponent {
         console.log('Profil sikeresen frissítve!');
       }).catch(error => {
         console.error('Hiba a profil mentése közben:', error);
+        alert('Hiba történt a profil mentésekor, próbáld újra!');
       });
     }
   }
@@ -63,13 +63,13 @@ export class ProfileComponent {
   loadOrders(email: string) {
     this.cardService.getOrdersByUser(email).subscribe(
       (orders: any) => {
-        this.orders = orders;
+        console.log('Rendelési adatok:', orders);  // Ellenőrizd a választ
+        this.orders = orders || [];
       },
       (error) => console.error('Hiba a rendelési előzmények betöltésekor:', error)
     );
   }
 
-  // Lapozás
   get paginatedComments() {
     const start = (this.currentPage - 1) * this.commentsPerPage;
     return this.comments.slice(start, start + this.commentsPerPage);

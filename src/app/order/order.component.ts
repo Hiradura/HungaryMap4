@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardService } from '../card.service';
+import { Observable } from 'rxjs';
 
 interface Order {
   name: string;
@@ -21,19 +22,6 @@ interface Order {
   standalone: false
 })
 export class OrderComponent implements OnInit {
-filterPrice($event: Event) {
-throw new Error('Method not implemented.');
-}
-filterCategory($event: Event) {
-throw new Error('Method not implemented.');
-}
-viewCart() {
-throw new Error('Method not implemented.');
-}
-addStuff(_t18: any,arg1: any) {
-throw new Error('Method not implemented.');
-}
-
   name: string = '';
   address: string = '';
   pickupDate: string = '';
@@ -45,17 +33,15 @@ throw new Error('Method not implemented.');
 
   paymentOptions: string[] = ['cash'];
   cart: any[] = [];
-cartCount: any;
-filteredShopDatas: any;
 
   constructor(private cardService: CardService, private router: Router) {}
 
   ngOnInit(): void {
+    console.log('Navigáltam a /order oldalra');
     this.cardService.getCart().subscribe(cartData => {
-      this.cart = cartData; 
+      this.cart = cartData;
     });
   }
-
   addOrder(): void {
     if (this.validateInputs()) {
       const orderData: Order = {
@@ -69,28 +55,53 @@ filteredShopDatas: any;
         paymentMethod: this.paymentMethod,
         cart: this.cart
       };
-      
-      this.cardService.addOrder(orderData); 
-      this.router.navigate(['home']);
+  
+      console.log('Rendelési adatok:', orderData);
+  
+      this.cardService.addOrder(orderData).subscribe(
+        (response) => {
+          console.log('Rendelés sikeresen leadva', response);
+          this.resetForm();
+          this.cardService.clearCart();
+          this.router.navigate(['home']);
+        },
+        (error) => {
+          console.error('Hiba történt a rendelés leadása közben', error);
+          alert('Hiba történt a rendelés leadása közben');
+        }
+      );
     } else {
       console.error('Hibás bemenet: Minden mező kitöltése kötelező!');
+      alert('Minden mezőt ki kell tölteni, és az email címnek érvényesnek kell lennie!');
     }
   }
-
   private validateInputs(): boolean {
     return (
-      this.name.trim().length > 0 &&
-      this.address.trim().length > 0 &&
-      this.pickupDate.trim().length > 0 &&
-      this.pickupTime.trim().length > 0 &&
-      this.phone.trim().length > 0 &&
-      this.email.trim().length > 0 &&
+      this.isNotEmpty(this.name) &&
+      this.isNotEmpty(this.address) &&
+      this.isNotEmpty(this.pickupDate) &&
+      this.isNotEmpty(this.pickupTime) &&
+      this.isNotEmpty(this.phone) &&
+      this.isNotEmpty(this.email) &&
       this.validateEmail(this.email)
     );
   }
-
-  public validateEmail(email: string): boolean {
+  private isNotEmpty(value: string): boolean {
+    return value.trim().length > 0;
+  }
+  private validateEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
-  }  
+  }
+  private resetForm(): void {
+    this.name = '';
+    this.address = '';
+    this.pickupDate = '';
+    this.pickupTime = '';
+    this.comment = '';
+    this.phone = '';
+    this.email = '';
+    this.paymentMethod = 'cash';
+    this.cart = [];
+  }
 }

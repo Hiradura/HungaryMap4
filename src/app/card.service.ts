@@ -1,17 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CardService {
+  private card: any[] = [];
+  private cardSub = new BehaviorSubject<any[]>([]);
+  private ordersURL = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/orders.json";
 
-  private card:any=[]
-  private cardSub = new BehaviorSubject([])
-  private databaseURL= "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/shop/turafelszereles.json"
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  // Rendelés hozzáadása a Firebase adatbázishoz
   addOrder(orderData: { 
     name: string; 
     address: string; 
@@ -22,39 +24,66 @@ export class CardService {
     email: string; 
     paymentMethod: string;
     cart: any[];
-  }) {
-    let body = { 
+  }): Observable<any> {
+    const body = { 
       ...orderData, 
-      cart: this.card
+      cart: orderData.cart.length ? orderData.cart : [] // Ha a kosár üres, akkor üres listát adunk át
     };
-  
-    this.http.post(this.databaseURL, body).subscribe(
-      (res) => console.log("Sikeres rendelés leadás", res),
-      (err) => console.error("Hiba történt a rendelés leadása közben", err)
+
+    return this.http.post<any>(this.ordersURL, body).pipe(
+      catchError(error => {
+        console.error('Hiba történt a rendelés mentése során:', error);
+        alert('Hiba történt a rendelés mentése során!'); // Felhasználó értesítése
+        return of(null); 
+      }),
+      map(response => {
+        console.log('Rendelés sikeresen leadva', response);
+        return response; 
+      })
     );
   }
-  
+
+  // Rendelések lekérdezése az email cím alapján
   getOrdersByUser(email: string): Observable<any[]> {
-    return this.http.get<any[]>(`/api/orders?email=${email}`);
-  }
-  getCart(){
-    return this.cardSub
-  }
-  addElement(element: any, db: any) {
-    let i = this.card.findIndex(
-      (e: any) => e.id === element.id
+    const url = `https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/orders.json?orderBy="email"&equalTo="${encodeURIComponent(email)}"`;
+
+    console.log("Lekérdezés URL:", url);
+    return this.http.get<any>(url).pipe(
+      catchError(error => {
+        console.error('Hiba történt a rendeléseket tartalmazó lekérdezés során:', error);
+        alert('Hiba történt a rendeléseket tartalmazó lekérdezés során!');
+        return of([]);  // Ha hiba van, üres tömböt adunk vissza
+      }),
+      map((response: any) => {
+        console.log('Válasz a Firebase-től:', response);
+        if (!response) return []; 
+        return Object.values(response); // Az adatok tömbbe konvertálása
+      })
     );
-    console.log("i", i);
-  
-    if (i === -1) {
+  }
+
+  // Kosár adatainak lekérése
+  getCart(): Observable<any[]> {
+    return this.cardSub.asObservable();
+  }
+
+  // Elem hozzáadása a kosárhoz
+  addElement(element: any, db: number): void {
+    const index = this.card.findIndex((e: any) => e.id === element.id);
+
+    if (index === -1) {
       element.db = db;
       this.card.push(element);
     } else {
- 
-      this.card[i].db = db;
+      this.card[index].db = db;
     }
-  
-    console.log("Kosár tartalma:", this.card); 
-    this.cardSub.next(this.card); 
-  }  
+
+    this.cardSub.next(this.card); // A kosár frissítése
+  }
+
+  // Kosár ürítése
+  clearCart(): void {
+    this.card = [];
+    this.cardSub.next(this.card); // A kosár frissítése
+  }
 }

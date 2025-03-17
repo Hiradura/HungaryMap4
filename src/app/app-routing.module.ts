@@ -30,13 +30,13 @@ const routes: Routes = [
   { path: 'settlements', component: SettlementsComponent },
   { path: 'shop', component: WebshopComponent },
   { path: 'card', component: CardComponent },
-  { path: 'order', component: OrderComponent },
+  { path: 'order', component: OrderComponent, canActivate: [LoggedUserGuard] },
   { path: 'comments', component: CommentsComponent, canActivate: [LoggedUserGuard] },
   { path: 'comments/:helysegnev', component: CommentsComponent },
   { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [LoggedUserGuard] },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/map', pathMatch: 'full' },
 ];
 
 @NgModule({

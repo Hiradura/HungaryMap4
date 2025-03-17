@@ -3,7 +3,7 @@
     <h2 class="card-title text-center mb-4">Profil</h2>
     <div class="row align-items-center">
       <div class="col-md-4 text-center">
-        <img [src]="loggedUser.photoURL" class="img-fluid rounded-circle shadow" alt="Profilkép">
+        <img [src]="loggedUser.photoURL || 'assets/default-avatar.jpg'" class="img-fluid rounded-circle shadow" alt="Profilkép">
       </div>
       <div class="col-md-8">
         <div class="form-floating mb-3">
@@ -30,6 +30,7 @@
   </div>
 </div>
 
+<!-- Kommentek Története -->
 <div *ngIf="comments.length > 0" class="card mt-4 shadow-sm">
   <div class="card-body">
     <h4 class="card-title text-primary mb-3">
@@ -52,6 +53,7 @@
   </div>
 </div>
 
+<!-- Vásárlási Előzmények -->
 <div *ngIf="orders.length > 0" class="card mt-4 shadow-sm">
   <div class="card-body">
     <h4 class="card-title text-success mb-3">

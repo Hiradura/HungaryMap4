@@ -29,7 +29,6 @@
     padding: 12px;
     transition: background 0.3s ease-in-out;
   }
-  
   .list-group-item:hover {
     background: #f8f9fa;
   }
@@ -37,19 +36,43 @@
     .card {
       padding: 16px;
     }
-  
+    
     .col-md-4.text-center {
       margin-bottom: 15px;
     }
-  
+    
     img.img-fluid {
       width: 100px;
       height: 100px;
     }
-  
+    
     .d-flex {
       flex-direction: column;
       gap: 10px;
     }
+  }
+  
+  /* New styles */
+  .card-body h4 {
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  .card-body ul {
+    margin-top: 10px;
+  }
+  .card-body ul li {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .card-body ul li:last-child {
+    border-bottom: none;
+  }
+  .text-muted {
+    font-size: 0.875rem;
+  }
+  
+  .btn-outline-warning, .btn-success, .btn-secondary {
+    font-size: 1rem;
+    padding: 8px 16px;
   }
   
