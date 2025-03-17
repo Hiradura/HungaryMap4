@@ -15,9 +15,7 @@ admin.initializeApp({
 });
 
 const app=express();
-
 app.use(cors({origin:'*'}));
-
 app.use(bodyParser.json());
 
 const verifyToken= (req,res, next)=>{

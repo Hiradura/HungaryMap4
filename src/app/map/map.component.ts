@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class MapComponent implements OnInit,AfterViewChecked  {
   datas : any;
+  lakes : any;
   isVisible = true;
   Text = '';
   X = 0;
@@ -25,7 +26,6 @@ export class MapComponent implements OnInit,AfterViewChecked  {
   private maxScale: number = 5;
   private isDragging: boolean = false;
   private dragStart: { x: number, y: number } | null = null;
-
   regionName1  = ''
   regionName2 = ''
   regionName3 = ''
@@ -35,6 +35,7 @@ export class MapComponent implements OnInit,AfterViewChecked  {
 
   ngOnInit(){
       this.getDatas()
+      this.getLakeDatas()
       this.route.paramMap.subscribe(params => {
         this.regionName1 = params.get(this.regionName1) || '';
         this.regionName2 = params.get(this.regionName2) || '';
@@ -46,6 +47,7 @@ export class MapComponent implements OnInit,AfterViewChecked  {
   }
   ngAfterViewChecked() {
     this.addCirclesToSvg();
+    this.addLakeCirclesToSvg();
   }
 
   zoomIn(): void {
@@ -99,6 +101,9 @@ export class MapComponent implements OnInit,AfterViewChecked  {
     this.base.getBigCities().subscribe((res)=>{
       this.datas=res
     })
+  }
+  getLakeDatas(){
+    this.base.getLakeDatas().subscribe((res)=>{this.lakes =res})
   }
   showText(event: MouseEvent, text: string) {
     this.Text = text;
@@ -179,10 +184,66 @@ export class MapComponent implements OnInit,AfterViewChecked  {
       svgElement.appendChild(circle);
     });
   }
+  addLakeCirclesToSvg()   {
+    const svgElement = document.getElementById('map1');
+    if (!svgElement) {
+      return;
+    }
+  
+    const minLong = 16;
+    const maxLong = 22;
+    const minLat = 45;
+    const maxLat = 49;
+    const svgWidth = 1000;
+    const svgHeight = 750;
+    const offsetX = 35;
+    const offsetY = 25;
+  
+    console.log("Adatok Firebase-ből:", this.lakes);
+  
+    this.lakes.forEach((lake: any, index: number) => {
+      if (!lake || typeof lake !== 'object' || !lake.coordinates) {
+        console.warn(`Hibás adat az indexnél (${index}):`, lake);
+        return;
+      }
+  
+      const lakeName = lake['name'] || `Ismeretlen tó ${index}`;
+      const hossz = parseFloat(lake.coordinates['longitude']);
+      const szel = parseFloat(lake.coordinates['latitude']);
+  
+      // Ellenőrizzük, hogy léteznek-e a koordináták
+      if (isNaN(hossz) || isNaN(szel)) {
+        console.warn(`Hiányzó vagy érvénytelen koordináták: ${lakeName} (long: ${lake.coordinates['longitude']}, lat: ${lake.coordinates['latitude']})`);
+        return;
+      }
+  
+      const cx = (hossz - minLong) / (maxLong - minLong) * svgWidth + offsetX;
+      const cy = svgHeight - ((szel - minLat) / (maxLat - minLat) * svgHeight) + offsetY;
+  
+      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      circle.setAttribute('cx', cx.toString());
+      circle.setAttribute('cy', cy.toString());
+      circle.setAttribute('r', '5');
+      circle.setAttribute('fill', 'blue');
+      circle.setAttribute('stroke', 'black');
+      circle.setAttribute('stroke-width', '1');
+      circle.setAttribute('id', lakeName);
+  
+      circle.addEventListener('mouseover', (event: MouseEvent) => {
+        this.showText(event, lakeName);
+      });
+  
+      circle.addEventListener('mouseout', () => {
+        this.hideText();
+      });
+  
+      svgElement.appendChild(circle);
+    });
+  }
   showMap(): void {
     this.addCirclesToSvg();
+    this.addLakeCirclesToSvg();
     this.currentMap = this.currentMap === 'map1' ? 'map2' : 'map1';
    
   }
-
 }

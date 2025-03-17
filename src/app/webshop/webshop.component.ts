@@ -25,9 +25,9 @@ export class WebshopComponent implements OnInit {
   filterPriceValue: number | null = null;
   filterCategoryValue: string = '';
   cartCount: number = 0;
-  filterOpen: boolean = false; // A szűrő sáv láthatósága
-  priceInvalid: boolean = false; // Hibajelzés az ár mezőre
-  categoryInvalid: boolean = false; // Hibajelzés a kategória mezőre
+  filterOpen: boolean = false; 
+  priceInvalid: boolean = false; 
+  categoryInvalid: boolean = false; 
 
   constructor(private base: BaseService, private router: Router, private crd: CardService) {}
 
@@ -39,7 +39,7 @@ export class WebshopComponent implements OnInit {
   }
 
   toggleFilter() {
-    this.filterOpen = !this.filterOpen; // A szűrő sáv megjelenítése/elrejtése
+    this.filterOpen = !this.filterOpen; 
   }
 
   loadShopData() {
@@ -53,7 +53,7 @@ export class WebshopComponent implements OnInit {
   filterPrice($event: Event) {
     const price = ($event.target as HTMLInputElement)?.value;
     if (price && isNaN(parseInt(price, 10))) {
-      this.priceInvalid = true;  // Hibás bevitel esetén
+      this.priceInvalid = true;  
     } else {
       this.priceInvalid = false;
       this.filterPriceValue = price ? parseInt(price, 10) : null;
@@ -63,7 +63,7 @@ export class WebshopComponent implements OnInit {
 
   filterCategory($event: Event) {
     const category = ($event.target as HTMLInputElement)?.value || '';
-    this.categoryInvalid = category.length === 0;  // Ha üres a kategória mező
+    this.categoryInvalid = category.length === 0; 
     this.filterCategoryValue = category;
     this.applyFilters();
   }

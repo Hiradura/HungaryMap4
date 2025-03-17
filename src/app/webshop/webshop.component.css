@@ -5,7 +5,7 @@
 
 .filter-panel {
   background: #fff;
-  padding: 15px; /* Csökkentett padding a kisebb panelhez */
+  padding: 15px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
@@ -53,7 +53,7 @@
 
 .card-img-top {
   width: 100%;
-  height: 200px;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -65,7 +65,7 @@
 @media (max-width: 767px) {
   .filter-panel {
     margin-top: 20px;
-    padding: 10px; /* Csökkentett padding mobilon */
+    padding: 10px; 
   }
 
   .filter-item {
@@ -73,8 +73,6 @@
   }
 
   .egesz .row {
-    display: flex;
-    flex-direction: column;
     align-items: center;
   }
 
@@ -100,7 +98,7 @@
 @media (min-width: 768px) and (max-width: 991px) {
   .filter-panel {
     margin-top: 20px;
-    padding: 15px; /* Csökkentett padding közepes képernyőkön */
+    padding: 15px; 
   }
 
   .col-md-4 {
@@ -108,8 +106,6 @@
   }
 
   .egesz .row {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
   }
 
@@ -125,8 +121,6 @@
 
 @media (min-width: 992px) {
   .egesz .row {
-    display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
   }
 
@@ -139,4 +133,26 @@
   .card-body {
     padding: 20px;
   }
+  .egesz{
+    width: 1200px;
+    height: 2000px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch; 
+  }
+.row, .col-12, .col-md-9 {
+    height: 100%;
 }
+.kep{
+  height: 500px;
+  width: 400px
+}
+.ez{
+  width: 300px;
+}
+.hely{
+  margin: -200px
+}
+
+}
+

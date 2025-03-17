@@ -9,8 +9,8 @@ export class BaseService {
   private databaseURL="https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/osszeshely"
   private balatonURL = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/balaton"  
   private bigCities = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/nagyvarosok/osszeshelynagyvarosok.json"
-  private shopdataURL = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/shop/shop/turafelszereles"
-
+  private shopdataURL = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/shop/turafelszereles"
+  private lakedataURL = "https://magyarorszagmap-default-rtdb.europe-west1.firebasedatabase.app/tavak"
   constructor(private http:HttpClient){}
 
   getBigCities(){
@@ -19,7 +19,9 @@ export class BaseService {
   getShopData(){
     return this.http.get(`${this.shopdataURL}/.json`)
   }
-
+  getLakeDatas(){
+    return this.http.get(`${this.lakedataURL}/.json`)
+  }
 
   getDatas(): Observable<any[]> {
     return this.http.get<{ [key: string]: any }>(`${this.databaseURL}.json`).pipe(

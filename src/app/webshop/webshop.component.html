@@ -1,6 +1,8 @@
+
+<!-- {{shopDatas|json}} -->
 <div class="container" style="max-width: 1200px; margin: 0 auto;">
-  <div class="row">
-    <div class="col-12 col-md-3"> <!-- Módosítva a szélesség: col-md-4-ről col-md-3-ra -->
+  <div class="row justify-content-center">
+    <div class="col-12 mb-4"> 
       <div class="filter-panel">
         <h4 class="text-center text-primary mb-4">Szűrés:</h4>
         <div class="filter-inputs">
@@ -32,22 +34,22 @@
             </div>
           </div>
         </div>
-        
-        <!-- Kosár gomb -->
         <div class="text-center mt-3">
           <button (click)="viewCart()" class="btn btn-primary btn-lg">
             Kosár <span class="badge badge-light">{{ cartCount }}</span>
           </button>
         </div>
+      </div>
+    </div>
 
       </div>
     </div>
-    <div class="col-12 col-md-9"> <!-- Módosítva a szélesség: col-md-8-ról col-md-9-re -->
+    <div class="col-12 col-md-9">
       <div class="egesz">
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center mt-5 hely">
           <div class="col-md-6 col-lg-4 mb-4" *ngFor="let data of filteredShopDatas">
-            <div class="card shadow-sm" style="max-width: 100%; width: 100%; margin: 0 auto;">
-              <img class="card-img-top" [src]="data.path" [alt]="data.alt">
+            <div class="card shadow-sm" style="width: 400px; margin: 0 auto;">
+              <img class="card-img-top kep" [src]="data.path" [alt]="data.alt">
               <div class="card-body">
                 <h5 class="card-title">{{ data.nev }}</h5>
                 <p class="card-text text-muted">{{ data.ar }} Ft</p>
@@ -59,5 +61,4 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+ 
