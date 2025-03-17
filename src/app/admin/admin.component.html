@@ -1,0 +1,28 @@
+<div *ngFor="let user of users" class="row my-2">
+
+    <div class="col">
+        <img referrerpolicy="no-referrer" *ngIf="user.photoURL" [src]="user.photoURL" class="img-thumbnail" alt="...">
+    </div>
+    <div class="col">
+        {{user.displayName}}
+    </div>
+    <div class="col">
+        {{user.email}}
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <div class="form-check form-switch">
+                    <input (change)="change(user.uid)" [(ngModel)]="user.claims.moderator" class="form-check-input" type="checkbox" id="moderator">
+                    <label class="form-check-label" for="moderator">Moderator</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-check form-switch">
+                    <input (change)="change(user.uid)" [(ngModel)]="user.claims.admin" class="form-check-input" type="checkbox" id="admin">
+                    <label class="form-check-label" for="admin">Admin</label>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

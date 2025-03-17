@@ -1,0 +1,17 @@
+h1{
+    text-align: center;
+}
+.balaton{
+    fill:#0CAFFF;
+    stroke-width: 2px;
+    stroke: black;
+    transform-origin: -10% 30%;
+    z-index: 1;
+    cursor:pointer;
+}
+.balaton:hover{
+    fill: #00308F
+}
+div{
+    text-align: center;
+}

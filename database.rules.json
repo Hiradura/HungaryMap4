@@ -1,0 +1,9 @@
+{
+  "rules": {
+    ".read": "auth == null || auth != null",
+    ".write": "auth == null || auth != null",
+    "orders": {
+      ".indexOn": ["email"]
+    }
+  }
+}

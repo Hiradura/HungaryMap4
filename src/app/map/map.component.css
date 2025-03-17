@@ -1,0 +1,142 @@
+.kozep{
+    text-align: center;
+    background: -webkit-linear-gradient(bottom,green,white 35%,red );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.megyek{
+    fill: white;
+   stroke: black;
+
+}
+.megye {
+    transition: transform 0.5s ease, fill 0.5s ease;
+    transform-origin: -10% 30%;
+    
+    cursor:pointer;
+    fill: white;
+  }
+ .megye:hover{
+    transform: skewY(-2deg);
+    fill: #CE2939;
+    z-index: 99;
+}
+.mousehover{
+    position: absolute;
+    color: black;
+    font-size: large;
+}
+.balaton{
+    fill: rgb(0, 191, 255);
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+    cursor:pointer;
+}
+.balaton:hover{
+    fill: rgb(10, 107, 219);
+    transform: skewY(-1deg);
+    cursor:pointer;
+}
+.ferto-to{
+    fill: rgb(0, 191, 255);
+    z-index: 0;
+    transition: transform 0.5s ease-in-out;
+}
+.ferto-to:hover{
+    cursor:pointer;
+    transform: skewY(-3deg);
+}
+.budapest{
+    fill:none;
+    stroke:#000000;
+    z-index: 0;
+    cursor:pointer;
+}
+.magyarország-külsö-border{
+    opacity: 0.5;
+    stroke: black;
+    stroke-width: 2px;
+}
+.tour-inline {
+    fill: none;
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+    cursor: pointer;
+    fill-rule: evenodd;
+    stroke: #0084ff;
+    stroke-width: 14.09076214;
+    stroke-miterlimit: 4;
+    stroke-dasharray: none;
+    stroke-opacity: 1;
+    transform: translate(188.92899px, 188.92901px); 
+}
+
+.tour-inline:hover {
+    transform: translate(208.92899px, 208.92901px) skewX(-1deg); 
+}
+
+.kektura-terkep {
+    position: relative;
+    width: 100%;
+    height: 100%; 
+    overflow: hidden; 
+  }
+  .egesz{
+    
+    fill: 	#477050
+  }
+  .top-right-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .top-right-btn-down{
+    position: absolute;
+    top: 50px;
+    right: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+  }
+.terkep{
+    margin-bottom: 5px;
+    background-color: #93be8a;
+}

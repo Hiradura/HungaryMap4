@@ -1,0 +1,173 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Map_of_Hungary_2020.png/600px-Map_of_Hungary_2020.png');
+    background-size: 90%;
+    background-position: center top;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+}
+
+.language-selector {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.language-selector button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 24px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.language-selector button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+h2 {
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: #008080;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 14px 18px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fafafa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #008080;
+    box-shadow: 0 0 8px rgba(0, 128, 128, 0.2);
+    outline: none;
+}
+
+button[type="submit"] {
+    padding: 12px;
+    background-color: #008080;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-size: 18px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #006666;
+    transform: scale(1.05);
+}
+
+.forgot-password,
+.already-have-account {
+    color: #008080;
+    font-size: 14px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.forgot-password:hover,
+.already-have-account:hover {
+    text-decoration: underline;
+}
+
+.already-have-account {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+    border-radius: 10px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+.alert.alert-success {
+    background-color: #28a745;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        font-size: 16px;
+    }
+
+    .language-selector button {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+}

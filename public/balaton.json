@@ -1,0 +1,46 @@
+{
+    "balaton":[
+        {
+            "ESZ": 46.909, 
+            "Helysegnev": "Siófok", 
+            "KH": 18.06533333, 
+            "eszaki_szelesseg_fok_perc": "46:54.54", 
+            "keleti_hossz_fok_perc": "18:03.92" 
+        },
+        {
+            "ESZ": 46.9095, 
+            "Helysegnev": "Tihany", 
+            "KH": 17.89033333, 
+            "eszaki_szelesseg_fok_perc": "46:54.57", 
+            "keleti_hossz_fok_perc": "17:53.42"
+        },
+        {
+            "ESZ": 46.879, 
+            "Helysegnev": "Zamárdi", 
+            "KH": 17.94783333, 
+            "eszaki_szelesseg_fok_perc": "46:52.74", 
+            "keleti_hossz_fok_perc": "17:56.87"
+        },
+        {
+            "ESZ": 46.958, 
+            "Helysegnev": "Balatonfüred", 
+            "KH": 17.88733333, 
+            "eszaki_szelesseg_fok_perc": "46:57.48", 
+            "keleti_hossz_fok_perc": "17:53.24"
+        },
+        {
+             "ESZ": 46.7705, 
+             "Helysegnev": "Keszthely", 
+             "KH": 17.25333333, 
+             "eszaki_szelesseg_fok_perc": "46:46.23", 
+             "keleti_hossz_fok_perc": "17:15.20"
+        },
+        {
+            "ESZ": 46.79566667, 
+            "Helysegnev": "Szigliget", 
+            "KH": 17.435, 
+            "eszaki_szelesseg_fok_perc": "46:47.74", 
+            "keleti_hossz_fok_perc": "17:26.10"
+        }
+    ]
+}

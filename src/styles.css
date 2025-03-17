@@ -1,0 +1,85 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #e3e3e3, #f8f9fa);
+    color: #212529;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Alulra igazítja a tartalmat */
+    width: 100%;
+}
+
+.container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 20px;
+    z-index: 2;
+}
+
+app-navbar {
+    display: block;
+    background: #ffffff;
+    color: #212529;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px 25px;
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+    z-index: 3;
+    width: 1200px;
+}
+
+app-navbar:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+app-navbar a {
+    color: #212529;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+}
+
+app-navbar a:hover {
+    color: #007aff;
+}
+
+.router-outlet {
+    background:transparent;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    transition: transform 0.3s ease;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px; /* Maximális szélesség beállítása */
+}
+
+.router-outlet:hover {
+    transform: scale(1.01);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        max-width: 100%;
+    }
+    app-navbar {
+        padding: 10px 15px;
+        width: 100%;
+    }
+    app-navbar a {
+        margin: 0 10px;
+        font-size: 0.9rem;
+    }
+    .router-outlet {
+        padding: 20px;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}

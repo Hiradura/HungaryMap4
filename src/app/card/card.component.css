@@ -1,0 +1,112 @@
+.card-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+  }
+  .card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  .card-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    background-color: #f1f1f1;
+  }
+  .card-item-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  .card-item:hover .card-item-image {
+    transform: scale(1.1);
+  }
+  .card-item-info {
+    flex-grow: 1;
+    padding-left: 15px;
+  }
+  
+  .card-item-info h5 {
+    font-size: 1.25rem;
+    color: #333;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .card-item-info p {
+    margin: 5px 0;
+    font-size: 0.875rem;
+    color: #666;
+  }
+  .card-item-actions .btn {
+    background-color: #e63946;
+    color: #fff;
+    border-radius: 50px;
+    padding: 10px 15px;
+    border: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .card-item-actions .btn:hover {
+    background-color: #d62828;
+    transform: scale(1.1);
+  }
+  .action-buttons {
+    margin-top: 20px;
+  }
+  
+  .action-buttons button {
+    width: 48%;
+    border-radius: 50px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .action-buttons .btn-success {
+    background-color: #2a9d8f;
+    border: none;
+  }
+  
+  .action-buttons .btn-success:hover {
+    background-color: #264653;
+    transform: scale(1.05);
+  }
+  .action-buttons .btn-outline-secondary {
+    background-color: transparent;
+    border: 2px solid #2a9d8f;
+    color: #2a9d8f;
+  }
+  
+  .action-buttons .btn-outline-secondary:hover {
+    background-color: #2a9d8f;
+    color: #fff;
+    transform: scale(1.05);
+  }
+  hr {
+    border: 0;
+    border-top: 2px solid #ddd;
+    margin: 1rem 0;
+  }
+  ng-template {
+    text-align: center;
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  .card-item-info p strong {
+    color: #333;
+  }
+  

@@ -1,0 +1,39 @@
+
+.megye{
+    fill: white;
+    stroke: black;
+    stroke-width: 2px; 
+ }
+ .idk{
+    fill: red;
+ }
+ .terulet{
+   transition: transform 0.5s ease-in-out;
+   transform-origin: -10% 30%;
+   z-index: 0;
+   cursor:pointer;
+   fill: white;
+ }
+ .terulet:hover{
+   transform: skewY(-1deg);
+   fill: lightgreen;
+}
+ .mousehover{
+   position: absolute;
+   color: black;
+   font-size: large;
+}
+h1{
+   text-align: center;
+}
+.pest{
+    transition: transform 0.5s ease-in-out;
+    transform-origin: -10% 30%;
+    z-index: 0;
+    cursor:pointer;
+    fill: white;
+}
+.pest:hover{
+    transform: skewY(-2deg);
+   fill: lightblue;
+}

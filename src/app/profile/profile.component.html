@@ -1,0 +1,94 @@
+<div *ngIf="loggedUser" class="card shadow-lg p-4 border-0" style="max-width: 1200px; margin: 0 auto;">
+  <div class="card-body">
+    <h2 class="card-title text-center mb-4">Profil</h2>
+    <div class="row align-items-center">
+      <div class="col-md-4 text-center">
+        <img [src]="loggedUser.photoURL || 'assets/default-avatar.jpg'" class="img-fluid rounded-circle shadow" alt="Profilkép">
+      </div>
+      <div class="col-md-8">
+        <div class="form-floating mb-3">
+          <input [(ngModel)]="editedDisplayName" type="text" class="form-control" id="floatingInput" [disabled]="!editMode">
+          <label for="floatingInput">Megjelenítési név</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input [(ngModel)]="loggedUser.email" type="email" class="form-control" id="email" disabled>
+          <label for="email">E-Mail</label>
+        </div>
+        <div class="d-flex gap-2">
+          <button *ngIf="!editMode" (click)="toggleEditMode()" class="btn btn-outline-warning">
+            <i class="bi bi-pencil-square"></i> Szerkesztés
+          </button>
+          <button *ngIf="editMode" (click)="saveProfile()" class="btn btn-success">
+            <i class="bi bi-check-lg"></i> Mentés
+          </button>
+          <button *ngIf="editMode" (click)="toggleEditMode()" class="btn btn-secondary">
+            <i class="bi bi-x-lg"></i> Mégse
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="comments.length > 0" class="card mt-4 shadow-sm">
+  <div class="card-body">
+    <h4 class="card-title text-primary mb-3">
+      <i class="bi bi-chat-left-text"></i> Kommentek Története
+    </h4>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let comment of paginatedComments" class="list-group-item">
+        <strong>{{ comment.Helysegnev }}:</strong> {{ comment.Comment }}
+        <span class="text-muted small d-block">Dátum: {{ comment.createdAt | date: 'yyyy-MM-dd HH:mm' }}</span>
+      </li>
+    </ul>
+    <div class="d-flex justify-content-between mt-3">
+      <button *ngIf="currentPage > 1" (click)="prevPage()" class="btn btn-outline-secondary">
+        Előző
+      </button>
+      <button *ngIf="currentPage * commentsPerPage < comments.length" (click)="nextPage()" class="btn btn-outline-secondary">
+        Következő
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="orders.length > 0" class="card mt-4 shadow-sm">
+  <div class="card-body">
+    <h4 class="card-title text-success mb-3">
+      <i class="bi bi-bag-check"></i> Vásárlási Előzmények
+    </h4>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let order of orders" class="list-group-item" (click)="openOrderDetails(order)">
+        <strong>{{ order.name }}</strong> - {{ order.address }}
+        <span class="text-muted small d-block">Dátum: {{ order.pickupDate }} - Idő: {{ order.pickupTime }}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="orderDetailsModalLabel">Rendelés Részletek</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>Rendelés száma: {{ selectedOrder?.id }}</h5>
+        <p><strong>Termékek:</strong></p>
+        <ul>
+          <li *ngFor="let item of selectedOrder?.cart">
+            {{ item.nev }} - {{ item.db }} db - {{ item.ar }} Ft
+          </li>
+        </ul>
+        <p><strong>Összeg:</strong> {{ calculateTotalPrice(selectedOrder?.cart) }} Ft</p>
+        <p><strong>Várható Pickup Dátum:</strong> {{ selectedOrder?.pickupDate }}</p>
+        <p><strong>Pickup Idő:</strong> {{ selectedOrder?.pickupTime }}</p>
+        <p><strong>Cím:</strong> {{ selectedOrder?.address }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezárás</button>
+      </div>
+    </div>
+  </div>
+</div>
