@@ -47,7 +47,7 @@
         <div class="row justify-content-center mt-4">
           <div class="col-md-6 col-lg-4 mb-4" *ngFor="let data of filteredShopDatas">
             <div class="card shadow-sm" style="max-width: 100%; width: 100%; margin: 0 auto;">
-              <img class="card-img-top" [src]="'assets/images/' + data.path" [alt]="data.alt">
+              <img class="card-img-top" [src]="data.path" [alt]="data.alt">
               <div class="card-body">
                 <h5 class="card-title">{{ data.nev }}</h5>
                 <p class="card-text text-muted">{{ data.ar }} Ft</p>
