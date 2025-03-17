@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Alulra igazítja a tartalmat */
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -57,7 +57,7 @@ app-navbar a:hover {
     transition: transform 0.3s ease;
     z-index: 1;
     width: 100%;
-    max-width: 1200px; /* Maximális szélesség beállítása */
+    max-width: 1200px;
 }
 
 .router-outlet:hover {
