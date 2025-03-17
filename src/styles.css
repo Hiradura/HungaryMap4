@@ -8,7 +8,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Alulra igazítja a tartalmat */
+    justify-content: flex-start;
     width: 100%;
 }
 

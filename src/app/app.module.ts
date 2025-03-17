@@ -31,11 +31,6 @@ import { OrderComponent } from './order/order.component';
 import { SettlementsComponent } from './settlements/settlements.component';
 import { AdminComponent } from './admin/admin.component';
 
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
