@@ -27,26 +27,29 @@
     </div>
     
     <div class="form-group">
-      <label for="pickupDate">Pickup Dátuma:</label>
+      <label for="pickupDate">Rendelés Dátuma:</label>
       <input 
         type="date" 
         id="pickupDate" 
         [(ngModel)]="pickupDate" 
         name="pickupDate" 
         required 
-        class="form-control">
+        class="form-control"
+        [min]="pickupDate">
     </div>
     
     <div class="form-group">
-      <label for="pickupTime">Pickup Időpontja:</label>
+      <label for="pickupTime">Időpont:</label>
       <input 
         type="time" 
         id="pickupTime" 
         [(ngModel)]="pickupTime" 
         name="pickupTime" 
         required 
-        class="form-control">
+        class="form-control"
+        [min]="pickupTime">
     </div>
+    
     
     <div class="form-group">
       <label for="comment">Megjegyzés:</label>
@@ -55,8 +58,7 @@
         [(ngModel)]="comment" 
         name="comment" 
         class="form-control"
-        placeholder="Bármilyen megjegyzés a rendeléshez (pl. kérések)">
-      </textarea>
+        placeholder="Bármilyen megjegyzés a rendeléshez (pl. kérések)"></textarea>
     </div>
 
     <div class="form-group">
@@ -93,16 +95,22 @@
         <option *ngFor="let option of paymentOptions" [value]="option">{{ option }}</option>
       </select>
     </div>
+
     <div class="form-group">
       <button type="submit" class="btn btn-primary" [disabled]="!orderForm.form.valid">Rendelés Leadása</button>
     </div>
   </form>
-   <div *ngIf="cart.length > 0">
+  
+  <div *ngIf="cart.length > 0">
     <h3>Kosár tartalma:</h3>
     <ul>
       <li *ngFor="let item of cart">
         {{ item.name }} - {{ item.db }} db
       </li>
     </ul>
+  </div>
+
+  <div *ngIf="feedbackMessage" class="alert" [ngClass]="{'alert-success': feedbackMessage === 'A rendelés sikeresen leadva!', 'alert-danger': feedbackMessage !== 'A rendelés sikeresen leadva!'}">
+    {{ feedbackMessage }}
   </div>
 </div>

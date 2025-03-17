@@ -28,8 +28,8 @@ export class ProfileComponent {
       if (user) {
         this.loggedUser = user;
         this.editedDisplayName = user.displayName || '';
-        this.loadUserComments(user.email);  // Kommentek betöltése
-        this.loadOrders(user.email);        // Rendelések betöltése
+        this.loadUserComments(user.email); 
+        this.loadOrders(user.email);      
       }
     });
   }
@@ -63,7 +63,7 @@ export class ProfileComponent {
   loadOrders(email: string) {
     this.cardService.getOrdersByUser(email).subscribe(
       (orders: any) => {
-        console.log('Rendelési adatok:', orders);  // Ellenőrizd a választ
+        console.log('Rendelési adatok:', orders);
         this.orders = orders || [];
       },
       (error) => console.error('Hiba a rendelési előzmények betöltésekor:', error)

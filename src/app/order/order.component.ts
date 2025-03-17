@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CardService } from '../card.service';
-import { Observable } from 'rxjs';
 
 interface Order {
   name: string;
@@ -30,9 +29,9 @@ export class OrderComponent implements OnInit {
   phone: string = '';
   email: string = '';
   paymentMethod: string = 'cash';
-
   paymentOptions: string[] = ['cash'];
   cart: any[] = [];
+  feedbackMessage: string = '';
 
   constructor(private cardService: CardService, private router: Router) {}
 
@@ -41,41 +40,60 @@ export class OrderComponent implements OnInit {
     this.cardService.getCart().subscribe(cartData => {
       this.cart = cartData;
     });
+    this.setMinPickupDate();
+    this.setMinPickupTime();
   }
+
   addOrder(): void {
-    if (this.validateInputs()) {
-      const orderData: Order = {
-        name: this.name,
-        address: this.address,
-        pickupDate: this.pickupDate,
-        pickupTime: this.pickupTime,
-        comment: this.comment,
-        phone: this.phone,
-        email: this.email,
-        paymentMethod: this.paymentMethod,
-        cart: this.cart
-      };
-  
-      console.log('Rendelési adatok:', orderData);
-  
-      this.cardService.addOrder(orderData).subscribe(
-        (response) => {
-          console.log('Rendelés sikeresen leadva', response);
-          this.resetForm();
-          this.cardService.clearCart();
-          this.router.navigate(['home']);
-        },
-        (error) => {
-          console.error('Hiba történt a rendelés leadása közben', error);
-          alert('Hiba történt a rendelés leadása közben');
-        }
-      );
-    } else {
-      console.error('Hibás bemenet: Minden mező kitöltése kötelező!');
-      alert('Minden mezőt ki kell tölteni, és az email címnek érvényesnek kell lennie!');
+    if (!this.validateInputs()) {
+      return;
     }
+    if (!this.validateDateAndTime()) {
+      return;
+    }
+
+    const orderData: Order = {
+      name: this.name,
+      address: this.address,
+      pickupDate: this.pickupDate,
+      pickupTime: this.pickupTime,
+      comment: this.comment,
+      phone: this.phone,
+      email: this.email,
+      paymentMethod: this.paymentMethod,
+      cart: this.cart
+    };
+
+    this.cardService.addOrder(orderData).subscribe(
+      (response) => {
+        this.feedbackMessage = 'A rendelés sikeresen leadva! Egy hitelesítő emailt küldtünk a megadott címre.';
+        this.resetForm();
+        this.cardService.clearCart();
+        this.router.navigate(['shop']);
+        this.sendVerificationEmail(this.email);
+      },
+      (error) => {
+        this.feedbackMessage = 'Hiba történt a rendelés leadása közben.';
+      }
+    );
   }
+
+  private validateDateAndTime(): boolean {
+    const selectedDate = new Date(`${this.pickupDate}T${this.pickupTime}:00`);
+    const currentDate = new Date();
+    if (selectedDate <= currentDate) {
+      this.feedbackMessage = 'A megadott dátum vagy idő érvénytelen! Kérjük, válasszon egy jövőbeli dátumot és időpontot!';
+      return false;
+    }
+    return true;
+  }
+
   private validateInputs(): boolean {
+    const namePattern = /^[a-zA-ZáéíóöőúüűÁÉÍÓÖŐÚÜŰ\s]+$/;
+    if (!namePattern.test(this.name)) {
+      this.feedbackMessage = 'A név érvénytelen! Csak betűk, szóközök és ékezetes karakterek engedélyezettek, számok nem.';
+      return false;
+    }
     return (
       this.isNotEmpty(this.name) &&
       this.isNotEmpty(this.address) &&
@@ -85,14 +103,24 @@ export class OrderComponent implements OnInit {
       this.isNotEmpty(this.email) &&
       this.validateEmail(this.email)
     );
+  
+
+    return true;
   }
+
   private isNotEmpty(value: string): boolean {
     return value.trim().length > 0;
   }
+
   private validateEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     return emailPattern.test(email);
   }
+
+  private sendVerificationEmail(email: string): void {
+    console.log('Hitelesítő email küldése a következő címre:', email);
+  }
+
   private resetForm(): void {
     this.name = '';
     this.address = '';
@@ -103,5 +131,18 @@ export class OrderComponent implements OnInit {
     this.email = '';
     this.paymentMethod = 'cash';
     this.cart = [];
+    this.feedbackMessage = '';
+  }
+
+  private setMinPickupDate(): void {
+    const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    this.pickupDate = today.toISOString().split('T')[0];
+  }
+
+  private setMinPickupTime(): void {
+    const today = new Date();
+    today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+    this.pickupTime = today.toISOString().split('T')[1].substring(0, 5);
   }
 }
