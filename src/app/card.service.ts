@@ -76,4 +76,9 @@ export class CardService {
     this.card = [];
     this.cardSub.next(this.card);
   }
+  deleteItem(itemToDelete: any): void {
+    const currentCart = this.cardSub.value; 
+    const updatedCart = currentCart.filter(item => item.id !== itemToDelete.id); 
+    this.cardSub.next(updatedCart); 
+  }
 }

@@ -1,4 +1,28 @@
-{{card|json}}
-
-<button class="btn"(click)="continuebtn()">Tovább a rendeléshez</button>
-<button class="btn" (click)="backbtn()" >Vissza a főoldalra</button>
+<div *ngIf="card.length > 0; else emptyCart" class="card-container">
+    <div *ngFor="let item of card" class="card-item d-flex align-items-center justify-content-between shadow-lg p-3 mb-3 rounded">
+      <img [src]="item.path" alt="{{ item.nev }}" class="card-item-image rounded">
+      <div class="card-item-info ms-3">
+        <h5>{{ item.nev }}</h5>
+        <p><strong>Darab:</strong> {{ item.db }} - <strong>Ár:</strong> {{ item.ar }} Ft</p>
+        <p><strong>Összeg:</strong> {{ price(item) }} Ft</p>
+      </div>
+      <div class="card-item-actions">
+        <!-- A Törlés gomb most már működik -->
+        <button class="btn btn-danger btn-sm" (click)="deleteItem(item)">Törlés</button>
+      </div>
+    </div>
+  
+    <hr>
+    <h4><strong>Végösszeg:</strong> {{ getTotalPrice() }} Ft</h4>
+  
+    <div class="action-buttons d-flex justify-content-between mt-4">
+      <button class="btn btn-outline-secondary" (click)="backbtn()">Vissza a főoldalra</button>
+      <button class="btn btn-success" (click)="continuebtn()">Tovább a rendeléshez</button>
+    </div>
+  </div>
+  
+  <ng-template #emptyCart>
+    <p>Az Ön kosara üres.</p>
+    <button class="btn" (click)="backbtn()">Vissza a főoldalra</button>
+  </ng-template>
+  

@@ -95,7 +95,6 @@ h3 {
   transition: background-color 0.3s;
 }
 
-/* Reszponzív beállítások */
 @media (max-width: 768px) {
   .comments-container {
     padding: 15px;

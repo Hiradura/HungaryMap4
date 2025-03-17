@@ -15,7 +15,7 @@ export class ProfileComponent {
   editedDisplayName = '';
   comments: any[] = [];
   orders: any[] = [];
-  selectedOrder: any = null; // This holds the order details for the modal
+  selectedOrder: any = null; 
 
   currentPage = 1;
   commentsPerPage = 5;
@@ -46,9 +46,7 @@ export class ProfileComponent {
           this.loggedUser.displayName = this.editedDisplayName;
         }
         this.editMode = false;
-        console.log('Profil sikeresen frissítve!');
       }).catch(error => {
-        console.error('Hiba a profil mentése közben:', error);
         alert('Hiba történt a profil mentésekor, próbáld újra!');
       });
     }
@@ -59,21 +57,14 @@ export class ProfileComponent {
       (userComments: any[]) => {
         this.comments = userComments;
       },
-      (error) => {
-        console.error('Hiba a kommentek betöltésekor:', error);
-      }
     );
   }
 
   loadOrders(email: string): void {
     this.cardService.getOrdersByUser(email).subscribe(
       (orders: any[]) => {
-        console.log('Rendelési adatok:', orders);
         this.orders = orders || [];
       },
-      (error) => {
-        console.error('Hiba a rendelési előzmények betöltésekor:', error);
-      }
     );
   }
 

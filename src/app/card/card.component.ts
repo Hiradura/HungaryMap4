@@ -5,33 +5,44 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card',
-  standalone: false,
-  
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  styleUrls: ['./card.component.css'],
+  standalone:false
 })
-export class CardComponent implements OnInit, OnDestroy{
+export class CardComponent implements OnInit, OnDestroy {
 
-  subscription!:Subscription
-  card:any
+  subscription!: Subscription;
+  card: any = [];
 
-  constructor(private router:Router,private crd:CardService){}
+  constructor(private router: Router, private crd: CardService) {}
 
-  backbtn(){
-    this.router.navigate(["/shop"])
+  backbtn() {
+    this.router.navigate(["/shop"]);
   }
-  continuebtn(){
-    this.router.navigate(["/order"])
+
+  continuebtn() {
+    this.router.navigate(["/order"]);
   }
+
   ngOnInit(): void {
-    this.subscription=this.crd.getCart().subscribe(
-      (res)=>this.card=res
-    )
+    this.subscription = this.crd.getCart().subscribe(
+      (res) => this.card = res || []
+    );
   }
+
   ngOnDestroy(): void {
-      if (this.subscription) this.subscription.unsubscribe()
+    if (this.subscription) this.subscription.unsubscribe();
   }
-  price(element:any){
-    return Number(element.db)*Number(element.ar)
+
+  price(element: any): number {
+    return Number(element.db) * Number(element.ar);
+  }
+
+  getTotalPrice(): number {
+    return this.card.reduce((total: number, item: any) => total + this.price(item), 0);
+  }
+
+  deleteItem(item: any): void {
+    this.crd.deleteItem(item);
   }
 }
