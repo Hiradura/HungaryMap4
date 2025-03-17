@@ -3,6 +3,16 @@ import { BaseService } from '../base.service';
 import { Router } from '@angular/router';
 import { CardService } from '../card.service';
 
+interface ShopData {
+  nev: string;
+  ar: number;
+  kategoria: string;
+  path: string;
+  alt: string;
+  maxDb: number;
+  db: number;
+}
+
 @Component({
   selector: 'app-webshop',
   templateUrl: './webshop.component.html',
@@ -10,11 +20,14 @@ import { CardService } from '../card.service';
   standalone: false
 })
 export class WebshopComponent implements OnInit {
-  shopDatas: any = [];
-  filteredShopDatas: any = [];
+  shopDatas: ShopData[] = [];
+  filteredShopDatas: ShopData[] = [];
   filterPriceValue: number | null = null;
   filterCategoryValue: string = '';
   cartCount: number = 0;
+  filterOpen: boolean = false; // A szűrő sáv láthatósága
+  priceInvalid: boolean = false; // Hibajelzés az ár mezőre
+  categoryInvalid: boolean = false; // Hibajelzés a kategória mezőre
 
   constructor(private base: BaseService, private router: Router, private crd: CardService) {}
 
@@ -25,29 +38,38 @@ export class WebshopComponent implements OnInit {
     });
   }
 
+  toggleFilter() {
+    this.filterOpen = !this.filterOpen; // A szűrő sáv megjelenítése/elrejtése
+  }
+
   loadShopData() {
     this.base.getShopData().subscribe((res) => {
       console.log('Shop data:', res);
       this.shopDatas = Object.values(res);
       this.filteredShopDatas = [...this.shopDatas];
-      
     });
   }
 
   filterPrice($event: Event) {
     const price = ($event.target as HTMLInputElement)?.value;
-    this.filterPriceValue = price ? parseInt(price, 10) : null;
-    this.applyFilters();
+    if (price && isNaN(parseInt(price, 10))) {
+      this.priceInvalid = true;  // Hibás bevitel esetén
+    } else {
+      this.priceInvalid = false;
+      this.filterPriceValue = price ? parseInt(price, 10) : null;
+      this.applyFilters();
+    }
   }
 
   filterCategory($event: Event) {
     const category = ($event.target as HTMLInputElement)?.value || '';
+    this.categoryInvalid = category.length === 0;  // Ha üres a kategória mező
     this.filterCategoryValue = category;
     this.applyFilters();
   }
 
   applyFilters() {
-    this.filteredShopDatas = this.shopDatas.filter((item: any) => {
+    this.filteredShopDatas = this.shopDatas.filter((item: ShopData) => {
       let matchesPrice = true;
       let matchesCategory = true;
 

@@ -1,6 +1,6 @@
-<div class="container mt-5">
+<div class="container mt-5" style="max-width: 1200px; padding: 0 15px;">
   <div class="comments-container">
-    <h3 class="mb-4">Hozzászólások</h3>
+    <h3 class="mb-4">Fórum</h3>
     <div *ngFor="let comment of comments" class="comment mb-4 p-3 border rounded shadow-sm">
       <p><strong>{{ comment.displayName }}</strong> - {{ comment.Helysegnev }}</p>
       <p>{{ comment.Comment }}</p>
@@ -8,7 +8,11 @@
 
       <button *ngIf="user && user.email === comment.Email" class="btn btn-danger btn-sm mt-2" (click)="deleteComment(comment.id, comment.Email)">Törlés</button>
     </div>
-
+    <div class="pagination mt-4">
+      <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="btn btn-secondary btn-sm">Előző</button>
+      <span class="mx-2">Oldal: {{ currentPage }} / {{ totalPages }}</span>
+      <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="btn btn-secondary btn-sm">Következő</button>
+    </div>
     <div class="comment-form mt-5">
       <h4 class="mb-3">Új hozzászólás</h4>
       <input type="text" [(ngModel)]="commentData.displayName" class="form-control mb-3" placeholder="Név" disabled>

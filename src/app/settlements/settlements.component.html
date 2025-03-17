@@ -1,7 +1,6 @@
-<div class="container mt-5" style="max-width: 1000px; margin: 0 auto;">
+<div class="container mt-5" style="max-width: 1200px; margin: 0 auto;">
     <div class="search-container mb-4">
       <div class="search-wrapper">
-        <!-- Keresőmező, ha szükséges -->
       </div>
       <button *ngIf="user" (click)="openModal()" class="btn btn-primary fixed-button">Település Hozzáadása</button>
     </div>
@@ -14,8 +13,7 @@
           <th>Keleti hosszúság fok, perc</th>
           <th>Északi szélesség</th>
           <th>Északi szélesség fok, perc</th>
-          <th>Szélesség</th> <!-- Szélesség oszlop hozzáadása -->
-          <th *ngIf="user">Műveletek: 
+          <th *ngIf="user">Keresés 
             <input class="form-control mr-sm-2 kereses" type="search" placeholder="Keresés" aria-label="search" (keyup)="onKeyUp($event)">
           </th>
         </tr>
@@ -27,7 +25,6 @@
           <td><input class="form-control" [(ngModel)]="data.keleti_hossz_fok_perc"></td>
           <td><input class="form-control" [(ngModel)]="data.ESZ"></td>
           <td><input class="form-control" [(ngModel)]="data.eszaki_szelesseg_fok_perc"></td>
-          <td><input class="form-control" [(ngModel)]="data.szeletseg"> <!-- Szélesség input mező hozzáadása --></td>
           <td>
             <button class="btn btn-outline-warning btn-sm" *ngIf="user" (click)="updateSettlement(data)">Frissítés</button>
             <button class="btn btn-outline-danger btn-sm" *ngIf="user" (click)="deleteSettlement(data.id)">Törlés</button>

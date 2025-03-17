@@ -28,7 +28,7 @@ app-navbar {
     border-radius: 12px;
     transition: all 0.3s ease-in-out;
     z-index: 3;
-    width: 100%;
+    width: 1200px;
 }
 
 app-navbar:hover {
@@ -49,7 +49,7 @@ app-navbar a:hover {
 }
 
 .router-outlet {
-    background: #ffffff;
+    background:transparent;
     border-radius: 16px;
     padding: 25px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
