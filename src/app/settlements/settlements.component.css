@@ -1,163 +1,182 @@
+/* Alap stílusok */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    margin: 20px;
-  }
-div {
-    margin-bottom: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-  }
-  
-.add-btn {
-    padding: 12px 20px;
-    margin: 5px 0;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-.add-btn:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-  }
-  
-.add-btn:active {
-    transform: translateY(0);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  margin: 20px;
 }
+
+div {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Gombok */
+.add-btn {
+  padding: 12px 20px;
+  margin: 5px 0;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-btn:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.add-btn:active {
+  transform: translateY(0);
+}
+
+/* Input mezők */
 input[type="text"],
 input[type="number"],
 input[type="search"] {
-    padding: 10px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    margin-right: 5px;
-    transition: all 0.3s ease;
-    width: 250px;
-    background-color: white;
-  }
-  
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-right: 5px;
+  transition: all 0.3s ease;
+  width: 250px;
+  background-color: white;
+}
+
 input[type="text"]:focus,
 input[type="number"]:focus,
 input[type="search"]:focus {
-    border-color: #007bff;
-    outline: none;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
-  }
-  
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Bootstrap gombok */
 button.btn {
-    padding: 8px 14px;
-    margin: 5px;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-  }
-  
+  padding: 8px 14px;
+  margin: 5px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+/* Egyes gombok */
 .btn-outline-warning {
-    background-color: #ffc107;
-    color: white;
-  }
-  
+  background-color: #ffc107;
+  color: white;
+}
+
 .btn-outline-warning:hover {
-    background-color: #e0a800;
-  }
-  
+  background-color: #e0a800;
+}
+
 .btn-outline-danger {
-    background-color: #dc3545;
-    color: white;
-  }
-  
+  background-color: #dc3545;
+  color: white;
+}
+
 .btn-outline-danger:hover {
-    background-color: #c82333;
-  }
-  
+  background-color: #c82333;
+}
+
 .btn-outline-primary {
-    background-color: #007bff;
-    color: white;
-  }
-  
+  background-color: #007bff;
+  color: white;
+}
+
 .btn-outline-primary:hover {
-    background-color: #0069d9;
-  }
-  
+  background-color: #0069d9;
+}
+
+/* Táblázat */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
-  
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
 th, td {
-    padding: 14px;
-    border: 1px solid #eee;
-    text-align: left;
-  }
-  
+  padding: 14px;
+  border: 1px solid #eee;
+  text-align: left;
+}
+
 th {
-    background-color: #f7f7f7;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
+  background-color: #f7f7f7;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 tr:hover {
-    background-color: #f3f3f3;
-  }
-  
+  background-color: #f3f3f3;
+}
+
 tbody tr:nth-child(even) {
-    background-color: #fafafa;
-  }
-.kep{
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    justify-self: center;
+  background-color: #fafafa;
 }
-.svg{
-    width: 500px;
-    height: auto;
+
+/* Kép stílus */
+.kep {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-self: center;
 }
+
+.svg {
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+}
+
+/* Rögzített gombok */
 .fixed-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    background-color: #28a745;
-    color: white;
-    border: none; 
-    border-radius: 50px; 
-    font-size: 18px; 
-    font-weight: bold; 
-    text-transform: uppercase; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease; 
-    cursor: pointer; 
-    z-index: 1000; 
-  }
-  
-  .fixed-button:hover {
-    background-color: #218838;
-    transform: translateY(-2px);
-  }
-  
-  .fixed-button:active {
-    background-color: #1e7e34;
-    transform: translateY(0);
-  }
-.kereses{
-    margin-bottom: 10px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 15px 25px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 1000;
 }
-/* .atmenet{
+
+.fixed-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.fixed-button:active {
+  background-color: #1e7e34;
+  transform: translateY(0);
+}
+
+/* Keresőmező */
+.kereses {
+  margin-bottom: 10px;
+  width: 250px;
+}
+
+/* Egyéb esetek */
+.atmenet {
   background-color: transparent;
-} */
+}

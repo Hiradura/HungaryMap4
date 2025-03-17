@@ -1,18 +1,20 @@
-<div class="comments-container">
-  <h3>Hozzászólások</h3>
-  <div *ngFor="let comment of comments" class="comment">
-    <p><strong>{{ comment.displayName }}</strong> - {{ comment.Helysegnev }}</p>
-    <p>{{ comment.Comment }}</p>
-    <p><small class="idő">Kommentelve: {{ comment.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</small></p>
+<div class="container mt-5">
+  <div class="comments-container">
+    <h3 class="mb-4">Hozzászólások</h3>
+    <div *ngFor="let comment of comments" class="comment mb-4 p-3 border rounded shadow-sm">
+      <p><strong>{{ comment.displayName }}</strong> - {{ comment.Helysegnev }}</p>
+      <p>{{ comment.Comment }}</p>
+      <p><small class="text-muted">Kommentelve: {{ comment.createdAt | date: 'yyyy-MM-dd HH:mm:ss' }}</small></p>
 
-    <button *ngIf="user && user.email === comment.Email" class="delete" (click)="deleteComment(comment.id, comment.Email)">Törlés</button>
-  </div> 
+      <button *ngIf="user && user.email === comment.Email" class="btn btn-danger btn-sm mt-2" (click)="deleteComment(comment.id, comment.Email)">Törlés</button>
+    </div>
 
-  <div class="comment-form">
-    <h4>Új hozzászólás</h4>
-    <input type="text" [(ngModel)]="commentData.displayName" placeholder="Név" disabled>
-    <input type="text" [(ngModel)]="commentData.Helysegnev" placeholder="Helységnév" [value]="commentData.Helysegnev" readonly>
-    <textarea [(ngModel)]="commentData.Comment" placeholder="Írd be a hozzászólásod..." required></textarea>
-    <button (click)="postComment()">Küldés</button>
+    <div class="comment-form mt-5">
+      <h4 class="mb-3">Új hozzászólás</h4>
+      <input type="text" [(ngModel)]="commentData.displayName" class="form-control mb-3" placeholder="Név" disabled>
+      <input type="text" [(ngModel)]="commentData.Helysegnev" class="form-control mb-3" placeholder="Helységnév" [value]="commentData.Helysegnev" readonly>
+      <textarea [(ngModel)]="commentData.Comment" class="form-control mb-3" placeholder="Írd be a hozzászólásod..." required></textarea>
+      <button (click)="postComment()" class="btn btn-primary w-100">Küldés</button>
+    </div>
   </div>
 </div>

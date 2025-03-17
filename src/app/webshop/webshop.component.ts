@@ -28,8 +28,9 @@ export class WebshopComponent implements OnInit {
   loadShopData() {
     this.base.getShopData().subscribe((res) => {
       console.log('Shop data:', res);
-      this.shopDatas = Object.values(res); 
-      this.filteredShopDatas = [...this.shopDatas]; 
+      this.shopDatas = Object.values(res);
+      this.filteredShopDatas = [...this.shopDatas];
+      
     });
   }
 

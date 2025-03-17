@@ -5,38 +5,12 @@ body {
     background-color: #f4f4f9;
     color: #333;
 }
-.egesz{
+
+.navbar {
     border-radius: 50px;
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-app-navbar {
-    display: block;
-    background-color: #2c3e50;
-    color: white;
+    padding: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px 20px;
-    transition: all 0.3s ease;
-}
-
-app-navbar:hover {
-    background-color: #34495e;
-}
-
-app-navbar a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-app-navbar a:hover {
-    color: #1abc9c;
+    background-color: #343a40; /* Sötét háttér a navbar-nak */
 }
 
 .navbar-brand {
@@ -45,37 +19,44 @@ app-navbar a:hover {
     color: transparent;
     font-weight: bold;
     font-size: 1.5rem;
-}
-
-.router-outlet {
-    background-color: white;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
     transition: transform 0.3s ease;
 }
 
-.router-outlet:hover {
-    transform: scale(1.02);
+.navbar-brand:hover {
+    transform: scale(1.1);
 }
 
-.margin {
-    margin: 15px;
+.navbar-nav .nav-link {
+    color: white !important;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.navbar-nav .nav-item.dropdown:hover .dropdown-menu {
-    display: block;
+.navbar-nav .nav-link:hover {
+    color: #1abc9c !important;
+    transform: translateY(-2px);
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
 }
 
 .dropdown-menu {
     background-color: #343a40;
-    border-radius: 0.25rem;
+    border-radius: 5px;
+    overflow: hidden;
+    border: none;
 }
 
 .dropdown-item {
-    color: #fff;
+    color: white;
     padding: 10px 20px;
+    transition: background 0.3s ease;
 }
 
 .dropdown-item:hover {
@@ -83,14 +64,152 @@ app-navbar a:hover {
     color: #fff;
 }
 
+.user {
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 15px;
+}
+
+.btn-outline-danger {
+    transition: all 0.3s ease;
+    border-radius: 20px;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
 @media (max-width: 767px) {
     .navbar-nav .nav-item.dropdown {
         width: 100%;
     }
+
+    .navbar-nav .nav-item {
+        text-align: center;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 10px 0;
+    }
+
+    .navbar-toggler {
+        margin-left: auto;
+    }
 }
 
-.user {
-    margin: 15px;
+.egesz {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px;
+}
+
+.card {
+    width: 22rem;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 2px solid #ddd;
+}
+
+.card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.card input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+
+.card button {
+    background-color: #34c759;
     color: white;
-    font-size: large;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: 500;
+    box-shadow: 0 3px 10px rgba(52, 199, 89, 0.3);
+}
+
+.card button:hover {
+    background-color: #2a9e49;
+    box-shadow: 0 5px 15px rgba(42, 158, 73, 0.4);
+}
+
+.kereses {
+    margin: 30px 0;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-item {
+    margin-bottom: 15px;
+}
+
+.filter-item input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+.filter-item label {
+    font-size: 0.9rem;
+    color: #777;
+    margin-top: 5px;
+}
+
+@media (max-width: 768px) {
+    .egesz {
+        padding: 20px;
+    }
+
+    .card {
+        width: 100%;
+    }
 }

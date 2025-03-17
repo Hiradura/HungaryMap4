@@ -8,6 +8,7 @@ interface Settlement {
   keleti_hossz_fok_perc: number;
   ESZ: number;
   eszaki_szelesseg_fok_perc: number;
+  szeletseg: number | null;  // Új mező hozzáadása
   id: string;
 }
 
@@ -19,7 +20,7 @@ interface Settlement {
 })
 export class SettlementsComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
-  datas: Settlement[] = []; 
+  datas: Settlement[] = [];
   paginatedDatas: Settlement[] = [];
   settlements = {
     id: null,
@@ -27,7 +28,8 @@ export class SettlementsComponent implements OnInit {
     KH: null,
     eszaki_szelesseg_fok_perc: null,
     keleti_hossz_fok_perc: null,
-    ESZ: null
+    ESZ: null,
+    szeletseg: null  // Új mező itt is
   };
   currentPage: number = 1;
   itemsPerPage: number = 50;
@@ -48,14 +50,14 @@ export class SettlementsComponent implements OnInit {
 
   getModifiedDatas(): void {
     this.baseService.getDatas().subscribe((data: Settlement[]) => {
-      this.datas = data; 
+      this.datas = data;
       this.updatePagination();
     });
   }
 
   updatePagination(): void {
-    const filteredDatas = this.word 
-      ? this.datas.filter(data => data.Helysegnev.toLowerCase().includes(this.word.toLowerCase())) 
+    const filteredDatas = this.word
+      ? this.datas.filter(data => data.Helysegnev.toLowerCase().includes(this.word.toLowerCase()))
       : this.datas;
 
     this.totalPages = Math.ceil(filteredDatas.length / this.itemsPerPage);
@@ -80,7 +82,7 @@ export class SettlementsComponent implements OnInit {
 
   onKeyUp(event: any): void {
     this.word = event.target.value;
-    this.currentPage = 1; 
+    this.currentPage = 1;
     this.updatePagination();
   }
 
@@ -91,7 +93,7 @@ export class SettlementsComponent implements OnInit {
     }
     this.baseService.updateSettlement(settlement.id, settlement).subscribe(() => {
       console.log("Sikeres frissítés:", settlement);
-      this.getModifiedDatas(); 
+      this.getModifiedDatas();
     }, error => {
       console.error("Hiba a frissítés során:", error);
     });
@@ -106,14 +108,15 @@ export class SettlementsComponent implements OnInit {
   addSettlement(): void {
     this.baseService.createSettlement(this.settlements).subscribe({
       next: () => {
-        this.getModifiedDatas(); 
-        this.settlements = { 
+        this.getModifiedDatas();
+        this.settlements = {
           id: null,
           Helysegnev: '',
           KH: null,
           keleti_hossz_fok_perc: null,
           ESZ: null,
-          eszaki_szelesseg_fok_perc: null
+          eszaki_szelesseg_fok_perc: null,
+          szeletseg: null  // Alapértelmezett érték
         };
       },
     });
@@ -128,7 +131,7 @@ export class SettlementsComponent implements OnInit {
   }
 
   closePanel(): void {
-    this.close.emit(); 
+    this.close.emit();
   }
 
   selectCity(cityName: string): void {
