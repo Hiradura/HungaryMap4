@@ -89,20 +89,21 @@ export class RegisterComponent {
     } else {
       this.emailError = '';
     }
-
+  
     if (!this.validatePassword()) {
       return;
     }
-
+  
     this.authService.register(this.email, this.password, this.displayName)
       .then(res => {
         this.registrationSuccess = true;
-        this.router.navigate(['/login']); 
+        this.router.navigate(['/map']);
       })
       .catch(err => {
         console.error("Hiba történt!", err);
       });
   }
+  
 
   registerWithGoogle() {
     this.authService.loginWithGoogle()

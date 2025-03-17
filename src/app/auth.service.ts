@@ -33,6 +33,10 @@ export class AuthService {
         throw error;
       });
   }
+  isLoggedIn(): boolean {
+    return !!this.afAuth.currentUser;
+  }
+  
 
   login(email: string, password: string): Promise<void> {
     return this.afAuth.signInWithEmailAndPassword(email, password).then(cred => {

@@ -1,17 +1,28 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import { LoggedInGuard, LoggedUserGuard } from './logged-user.guard'; 
 
-import { loggedUserGuard } from './logged-user.guard';
-
-describe('loggedUserGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) => 
-      TestBed.runInInjectionContext(() => loggedUserGuard(...guardParameters));
+describe('LoggedInGuard', () => {
+  let guard: LoggedInGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
+    guard = TestBed.inject(LoggedInGuard);
   });
 
   it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+    expect(guard).toBeTruthy();
+  });
+});
+
+describe('LoggedUserGuard', () => {
+  let guard: LoggedUserGuard;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    guard = TestBed.inject(LoggedUserGuard);
+  });
+
+  it('should be created', () => {
+    expect(guard).toBeTruthy();
   });
 });

@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SidePanelComponent } from './side-panel/side-panel.component';
 import { ProfileComponent } from './profile/profile.component';
-import { LoggedUserGuard } from './logged-user.guard';
+import { LoggedInGuard, LoggedUserGuard } from './logged-user.guard'; 
 import { NogradComponent } from './nograd/nograd.component';
 import { BudapestComponent } from './budapest/budapest.component';
 import { PestComponent } from './pest/pest.component';
@@ -33,9 +33,9 @@ const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'comments', component: CommentsComponent, canActivate: [LoggedUserGuard] },
   { path: 'comments/:helysegnev', component: CommentsComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedInGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [LoggedInGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [LoggedUserGuard] },
-  { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 

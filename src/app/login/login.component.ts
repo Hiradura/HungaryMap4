@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   currentLang: any;
@@ -71,6 +71,22 @@ export class LoginComponent {
       .catch(err => console.error("Hiba történt!", err.message));
   }
 
+  register() {
+    if (!this.email || !this.password) {
+      console.error("Adj meg egy e-mailt és egy jelszót!");
+      return;
+    }
+  
+    const displayName = 'Felhasználó neve';
+  
+    this.authService.register(this.email, this.password, displayName)
+      .then(res => {
+        console.log("Sikeres regisztráció!", res);
+        this.router.navigate(['/map']);
+      })
+      .catch(err => console.error("Regisztrációs hiba:", err.message));
+  }
+  
   loginWithGoogle() {
     this.authService.loginWithGoogle()
       .then(res => {
