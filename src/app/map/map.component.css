@@ -17,7 +17,7 @@
     fill: white;
   }
  .megye:hover{
-    transform: skewY(-2deg);
+    transform: skewY(-1deg);
     fill: #CE2939;
     z-index: 99;
 }
@@ -139,4 +139,23 @@
 .terkep{
     margin-bottom: 5px;
     background-color: #93be8a;
+}
+.idk{
+  fill:red
+}
+.tiszato{
+  transform: translate(694px, 226px);
+  transition: transform 0.3s ease-in-out;
+  fill: rgb(0, 191, 255);
+}
+.tiszato:hover{
+  cursor:pointer;
+  transform: translate(694px, 226px) scale(1.5);
+  fill: #0056b3; 
+}
+.to{
+  fill: rgb(0, 191, 255);
+}
+.duna{
+  transform: translate(530px, 230px);
 }

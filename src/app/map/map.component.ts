@@ -47,7 +47,6 @@ export class MapComponent implements OnInit,AfterViewChecked  {
   }
   ngAfterViewChecked() {
     this.addCirclesToSvg();
-    this.addLakeCirclesToSvg();
   }
 
   zoomIn(): void {
@@ -167,9 +166,9 @@ export class MapComponent implements OnInit,AfterViewChecked  {
       const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circle.setAttribute('cx', cx.toString());
       circle.setAttribute('cy', cy.toString());
-      circle.setAttribute('r', '3');
+      circle.setAttribute('r', '5');
       circle.setAttribute('fill', 'grey');
-      circle.setAttribute('stroke', 'black');
+      
       circle.setAttribute('stroke-width', '10');
       circle.setAttribute('id', helysegNev);
       
@@ -180,70 +179,56 @@ export class MapComponent implements OnInit,AfterViewChecked  {
       circle.addEventListener('mouseout', () => {
         this.hideText();
       });
-
       svgElement.appendChild(circle);
     });
   }
-  addLakeCirclesToSvg()   {
-    const svgElement = document.getElementById('map1');
-    if (!svgElement) {
-      return;
-    }
-  
-    const minLong = 16;
-    const maxLong = 22;
-    const minLat = 45;
-    const maxLat = 49;
-    const svgWidth = 1000;
-    const svgHeight = 750;
-    const offsetX = 35;
-    const offsetY = 25;
-  
-    console.log("Adatok Firebase-ből:", this.lakes);
-  
-    this.lakes.forEach((lake: any, index: number) => {
-      if (!lake || typeof lake !== 'object' || !lake.coordinates) {
-        console.warn(`Hibás adat az indexnél (${index}):`, lake);
-        return;
-      }
-  
-      const lakeName = lake['name'] || `Ismeretlen tó ${index}`;
-      const hossz = parseFloat(lake.coordinates['longitude']);
-      const szel = parseFloat(lake.coordinates['latitude']);
-  
-      // Ellenőrizzük, hogy léteznek-e a koordináták
-      if (isNaN(hossz) || isNaN(szel)) {
-        console.warn(`Hiányzó vagy érvénytelen koordináták: ${lakeName} (long: ${lake.coordinates['longitude']}, lat: ${lake.coordinates['latitude']})`);
-        return;
-      }
-  
-      const cx = (hossz - minLong) / (maxLong - minLong) * svgWidth + offsetX;
-      const cy = svgHeight - ((szel - minLat) / (maxLat - minLat) * svgHeight) + offsetY;
-  
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', cx.toString());
-      circle.setAttribute('cy', cy.toString());
-      circle.setAttribute('r', '5');
-      circle.setAttribute('fill', 'blue');
-      circle.setAttribute('stroke', 'black');
-      circle.setAttribute('stroke-width', '1');
-      circle.setAttribute('id', lakeName);
-  
-      circle.addEventListener('mouseover', (event: MouseEvent) => {
-        this.showText(event, lakeName);
-      });
-  
-      circle.addEventListener('mouseout', () => {
-        this.hideText();
-      });
-  
-      svgElement.appendChild(circle);
-    });
-  }
+  // addLakeCirclesToSvg()   {
+  //   const svgElement = document.getElementById('map1');
+  //   if (!svgElement) {
+  //     return;
+  //   }
+  //   const minLong = 16;
+  //   const maxLong = 22;
+  //   const minLat = 45;
+  //   const maxLat = 49;
+  //   const svgWidth = 1000;
+  //   const svgHeight = 750;
+  //   const offsetX = 35;
+  //   const offsetY = 25;  
+  //   this.lakes.forEach((lake: any, index: number) => {
+  //     if (!lake || typeof lake !== 'object' || !lake.coordinates) {
+  //       console.warn(`Hibás adat az indexnél (${index}):`, lake);
+  //       return;
+  //     }
+  //     const lakeName = lake['name'] || `Ismeretlen tó ${index}`;
+  //     const hossz = parseFloat(lake.coordinates['longitude']);
+  //     const szel = parseFloat(lake.coordinates['latitude']);
+  //     if (isNaN(hossz) || isNaN(szel)) {
+  //       console.warn(`Hiányzó vagy érvénytelen koordináták: ${lakeName} (long: ${lake.coordinates['longitude']}, lat: ${lake.coordinates['latitude']})`);
+  //       return;
+  //     }
+  //     const cx = (hossz - minLong) / (maxLong - minLong) * svgWidth + offsetX;
+  //     const cy = svgHeight - ((szel - minLat) / (maxLat - minLat) * svgHeight) + offsetY;
+  //     const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  //     circle.setAttribute('cx', cx.toString());
+  //     circle.setAttribute('cy', cy.toString());
+  //     circle.setAttribute('r', '5');
+  //     circle.setAttribute('fill', 'blue');
+  //     circle.setAttribute('stroke', 'blue');
+  //     circle.setAttribute('stroke-width', '1');
+  //     circle.setAttribute('id', lakeName);
+  //     circle.addEventListener('mouseover', (event: MouseEvent) => {
+  //       this.showText(event, lakeName);
+  //     });
+  //     circle.addEventListener('mouseout', () => {
+  //       this.hideText();
+  //     });
+  //     svgElement.appendChild(circle);
+  //   });
+  // }
   showMap(): void {
     this.addCirclesToSvg();
-    this.addLakeCirclesToSvg();
+
     this.currentMap = this.currentMap === 'map1' ? 'map2' : 'map1';
-   
   }
 }
