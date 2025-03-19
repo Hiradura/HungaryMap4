@@ -21,6 +21,7 @@ interface ShopData {
 })
 export class WebshopComponent implements OnInit {
   shopDatas: ShopData[] = [];
+  bikeDatas:[] = []
   filteredShopDatas: ShopData[] = [];
   filterPriceValue: number | null = null;
   filterCategoryValue: string = '';
@@ -44,12 +45,17 @@ export class WebshopComponent implements OnInit {
 
   loadShopData() {
     this.base.getShopData().subscribe((res) => {
-      console.log('Shop data:', res);
       this.shopDatas = Object.values(res);
       this.filteredShopDatas = [...this.shopDatas];
     });
   }
 
+
+  // loadBikeData() {
+  //   this.base.getBikes().subscribe((res) => {
+  //     this.bikeDatas = res
+  //   });
+  // }
   filterPrice($event: Event) {
     const price = ($event.target as HTMLInputElement)?.value;
     if (price && isNaN(parseInt(price, 10))) {
