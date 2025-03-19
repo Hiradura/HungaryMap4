@@ -155,10 +155,156 @@
 }
 .to{
   fill: rgb(0, 191, 255);
+  transition: transform 0.3s ease-in-out;
+}
+.to:hover{
+  fill: #0056b3;
+  cursor:pointer; 
 }
 .duna{
   transform: translate(530px, 230px);
 }
 .tavak{
   transform: translate(40px, 10px);
+}
+.velenceito{
+  transform: translate(402px, 323px) 
+}
+.velenceito:hover{
+  transform: translate(402px, 323px) scale(1.5);
+  fill: #0056b3;
+  cursor:pointer; 
+}
+.harkaito {
+  transform: translate(615.5625px, 506.9375px);
+}
+.hortobagyi {
+  transform: translate(753px, 232px);
+}
+.halasto {
+  transform: translate(811px, 385px);
+}
+.peterei {
+  transform: translate(600px, 455px);
+}
+.fenyes {
+  transform: translate(731px, 240px);
+}
+.abonyi {
+  transform: translate(641px, 319px);
+}
+.rakaca {
+  transform: translate(887px, 93px);
+}
+.Fuzesgyarmati {
+  transform: translate(828px, 379px);
+}
+.Fegyverneki {
+  transform: translate(676px, 385px);
+}
+.Patko {
+  transform: translate(784px, 224px);
+}
+.Retkozi {
+  transform: translate(914px, 76px);
+}
+.Csukas {
+  transform: translate(666px, 402px);
+}
+.uri {
+  transform: translate(628px, 339px);
+}
+.ferto-laposi {
+  transform: translate(741px, 254px);
+}
+.Laskovolgyi {
+  transform: translate(733px, 208px);
+}
+.madarasz {
+  transform: translate(660px, 540px);
+}
+.bager {
+  transform: translate(930px, 136px);
+}
+.lak {
+  transform: translate(771px, 148px);
+}
+.habos {
+  transform: translate(613px, 374px);
+}
+.perenyei {
+  transform: translate(180px, 284px);
+}
+.ostorosi {
+  transform: translate(739px, 197px);
+}
+.bogacs {
+  transform: translate(750px, 175px);
+}
+
+.harkaito:hover {
+  transform: translate(615.5625px, 506.9375px) scale(2);
+}
+.hortobagyi:hover {
+  transform: translate(753px, 232px) scale(2);
+}
+.halasto:hover {
+  transform: translate(811px, 385px) scale(2);
+}
+.peterei:hover {
+  transform: translate(600px, 455px) scale(2);
+}
+.fenyes:hover {
+  transform: translate(731px, 240px) scale(2);
+}
+.abonyi:hover {
+  transform: translate(641px, 319px) scale(2);
+}
+.rakaca:hover {
+  transform: translate(887px, 93px) scale(2);
+}
+.Fuzesgyarmati:hover {
+  transform: translate(828px, 379px) scale(2);
+}
+.Fegyverneki:hover {
+  transform: translate(676px, 385px) scale(2);
+}
+.Patko:hover {
+  transform: translate(784px, 224px) scale(2);
+}
+.Retkozi:hover {
+  transform: translate(914px, 76px) scale(2);
+}
+.Csukas:hover {
+  transform: translate(666px, 402px) scale(2);
+}
+.uri:hover {
+  transform: translate(628px, 339px) scale(2);
+}
+.ferto-laposi:hover {
+  transform: translate(741px, 254px) scale(2);
+}
+.Laskovolgyi:hover {
+  transform: translate(733px, 208px) scale(2);
+}
+.madarasz:hover {
+  transform: translate(660px, 540px) scale(2);
+}
+.bager:hover {
+  transform: translate(930px, 136px) scale(2);
+}
+.lak:hover {
+  transform: translate(771px, 148px) scale(2);
+}
+.habos:hover {
+  transform: translate(613px, 374px) scale(2);
+}
+.perenyei:hover {
+  transform: translate(180px, 284px) scale(2);
+}
+.ostorosi:hover {
+  transform: translate(739px, 197px) scale(2);
+}
+.bogacs:hover {
+  transform: translate(750px, 175px) scale(2);
 }
