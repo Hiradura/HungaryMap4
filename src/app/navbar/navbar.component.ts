@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { SearchService } from '../search.service';
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent {
   admin: any = null 
 
   constructor(private authService: AuthService, public router: Router, private search: SearchService) {}
+  isDropdownOpen = false;
 
   ngOnInit() {
     this.authService.getCurrentUser().subscribe(user => {
@@ -23,10 +25,10 @@ export class NavbarComponent {
     });
     this.authService.getIsAdmin().subscribe(admin => {
       this.admin = admin
-
-    });
-  }
-
+    })}
+    toggleDropdown(state: boolean) {
+      this.isDropdownOpen = state;
+    }
   logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
