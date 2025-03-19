@@ -8,8 +8,8 @@
       data-bs-target="#navbarNav"
       aria-controls="navbarNav"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+      aria-label="Toggle navigation">
+
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -27,14 +27,18 @@
         <li class="nav-item">
           <a class="nav-link" *ngIf="admin" routerLink="/admin" routerLinkActive="active">Admin</a>
         </li>
-        <li class="nav-item dropdown" *ngIf="!user">
-          <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li class="nav-item dropdown" 
+            [ngClass]="{ 'show': isDropdownOpen }" 
+            *ngIf="!user"
+            (mouseenter)="toggleDropdown(true)" 
+            (mouseleave)="toggleDropdown(false)">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-haspopup="true" [attr.aria-expanded]="isDropdownOpen">
             Felhasználói menü
           </a>
-          <ul class="dropdown-menu" aria-labelledby="userMenu">
-            <li><a class="dropdown-item" routerLink="/register" routerLinkActive="active">Regisztráció</a></li>
-            <li><a class="dropdown-item" routerLink="/login" routerLinkActive="active">Bejelentkezés</a></li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" [ngClass]="{ 'show': isDropdownOpen }">
+            <a class="dropdown-item" routerLink="/register" [routerLinkActive]="['active']">Regisztráció</a>
+            <a class="dropdown-item" routerLink="/login" [routerLinkActive]="['active']">Bejelentkezés</a>
+          </div>
         </li>
       </ul>
       <div class="d-flex align-items-center">
